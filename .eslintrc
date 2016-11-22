@@ -1,0 +1,18 @@
+{
+  "parser" : "babel-eslint",
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "rules": {
+    "jsx-quotes": [2, "prefer-single"]
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": false
+  },
+  "plugins": [
+    "react"
+  ],
+  "globals": {
+    "document": true,
+    "window": true
+  }
+}
