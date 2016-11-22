@@ -4,8 +4,12 @@ var app = express()
 
 app.use(express.static(__dirname + '/public'));
 
-app.get('*', function (req, res) {
+app.get('/', function (req, res) {
   res.sendFile(path.resolve(__dirname, 'public/index.html'))
+})
+
+app.get('/api/data', function(req,res){
+  res.status(200).json({ success: 'success' })
 })
 
 app.listen(3000, function () {
