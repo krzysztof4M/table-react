@@ -1,0 +1,22 @@
+{
+  "name": "table-react",
+  "version": "0.0.1",
+  "description": "React table with pagination, filtering, sorting, and rows per page",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krzysztof4M/table-react.git"
+  },
+  "author": "Krzysztof G",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krzysztof4M/table-react/issues"
+  },
+  "homepage": "https://github.com/krzysztof4M/table-react#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
