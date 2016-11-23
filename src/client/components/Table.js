@@ -2,6 +2,12 @@ import React from 'react'
 
 import Loader from './Loader'
 import TablePlaceholder from './TablePlaceholder'
+import TableFilter from './TableFilter'
+import TableLength from './TableLength'
+import TableHeader from './TableHeader'
+import TableCounter from './TableCounter'
+import TablePagination from './TablePagination'
+import TableRow from './TableRow'
 
 class Table extends React.Component {
 
