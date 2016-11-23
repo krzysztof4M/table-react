@@ -10,15 +10,15 @@ class TablePagination extends React.Component {
 
   onClick(event) {
     event.preventDefault();
-    const newPage = event.target.getAttribute('value');
-    this.props.handlePagination(event.target.getAttribute('value'));    
+    const newPage = parseInt(event.target.getAttribute('value'),0);
+    this.props.handlePagination(newPage);    
   }
 
   renderPreviousButtons(start, pageNumber) {
     const liClassName = pageNumber == 1 ? 'paginate_button previous disabled' : 'paginate_button previous';
     const faClassName = start ? 'fa fa-angle-double-left' : 'fa fa-angle-left';
     return (
-        <li className={liClassName} id='dt_basic_previous'>
+        <li className='paginate-button'>
           <a href='#' onClick={this.onClick} value={(start || pageNumber == 1) ? 1 : pageNumber - 1}><i className={faClassName}></i></a>
         </li>   
       );
@@ -28,8 +28,8 @@ class TablePagination extends React.Component {
     const liClassName = pageNumber == pagesCount ? 'paginate_button next disabled' : 'paginate_button next';
     const faClassName = end ? 'fa fa-angle-double-right' : 'fa fa-angle-right';
     return (
-        <li className={liClassName} id='dt_basic_previous'>
-          <a href='#' onClick={this.onClick} value={end || pagesCount == pageNumber ? pagesCount : pageNumber + 1}><i className={faClassName}></i></a>
+        <li className='paginate-button'>
+          <a href='#' onClick={this.onClick} value={end || pagesCount == pageNumber ? pagesCount : pageNumber + 1}><i className='fa fa-angle-left'></i></a>
         </li>   
       );
   }
@@ -46,8 +46,8 @@ class TablePagination extends React.Component {
         ].filter(value => (value > pagesCount || value < 1) ? false : true );
 
     return (
-      <div className='dataTables_paginate paging_simple_numbers' id='dt_basic_paginate'>
-        <ul className='pagination pagination-sm'>
+      <div className=''>
+        <ul className='pagination-list'>
           { this.renderPreviousButtons(true, page) }
           { this.renderPreviousButtons(false, page) }
           { pagesList.map(pageNumber => <PaginationLink onClick={this.onClick} pageNumber={pageNumber} isActive={page == pageNumber ? true : false} key={pageNumber}/>) }

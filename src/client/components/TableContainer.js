@@ -61,29 +61,43 @@ class TableContainer extends React.Component {
   }
 
   handleSearch(newFilter) {     
-    this.setState({filter: newFilter, page: 1}, () => {
-        this.fetchData();   
-    });
+    this.setState({
+      filter: newFilter,
+      page: 1
+    },
+    () => {
+        this.fetchData()   
+      }
+    )
   }
 
   handleChangeLimit(newLimit) {
-    this.setState({limit: newLimit, page: 1}, () => {
-        this.fetchData();   
-    });
+    this.setState({
+      limit: newLimit,
+      page: 1
+    },
+    () => {
+        this.fetchData()   
+      }
+    )
   }
 
   handlePagination(newPage) {
-    this.setState({page: newPage}, () => {
+    this.setState({
+      page: newPage
+    },
+    () => {
         this.fetchData();   
-    });
+      }
+    );
   }
 
   handleSort(event) {
     event.preventDefault();
-    const column = event.target.getAttribute('value');
-    let sort = 'asc';
-    if(this.state.order.column == event.target.getAttribute('value')) {
-      sort = this.state.order.sort == 'asc' ? 'desc' : 'asc';
+    const column = event.target.getAttribute('value')
+    let sort = this.state.order.sort
+    if(this.state.order.column === column) {
+      sort = this.state.order.sort === 'asc' ? 'desc' : 'asc'
     }
     this.setState({order: {
       column: column,

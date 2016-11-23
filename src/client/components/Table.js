@@ -20,26 +20,25 @@ class Table extends React.Component {
   }
 
   render() {
-    const { title, filter, headers,  handleSearch, all_records, page, limit, handlePagination, handleChangeLimit, handleSort } = this.props       
+    const { title, filter, headers, handleSearch, all_records, page, limit, handlePagination, handleChangeLimit, handleSort } = this.props       
     return (
-      <div className=''>
-        <header role=''>
+      <div className='wrapper'>
+        <header>
           <h2>{title}</h2>
         </header>
-        <div role=''>
+        <div>
           <div className=''>
             <div className=''>
-              <div className=''>
+              <div className='toolbar'>
                 <div className=''>
                   <TableFilter  filter={filter} 
-                                handleSearch={handleSearch}
-                  />
+                                handleSearch={handleSearch} />
                 </div>
                 <div className=''>
-                  <TableLength handleChangeLimit={handleChangeLimit}/>
+                  <TableLength handleChangeLimit={handleChangeLimit} />
                 </div>
               </div>
-              <table className=''>
+              <table className='table'>
                 <thead>
                   <TableHeader  headers={headers}
                                 handleSort={handleSort}
@@ -51,11 +50,11 @@ class Table extends React.Component {
                   }
                 </tbody>
               </table>
-              <div className=''>
+              <div className='footer'>
                 <div className=''>
                   <TableCounter all_records={all_records} page={page} limit={limit} />
                 </div>
-                <div className='c'>
+                <div className=''>
                   <TablePagination handlePagination={handlePagination} limit={limit} all_records={all_records} page={this.props.page} />
                 </div>
               </div>

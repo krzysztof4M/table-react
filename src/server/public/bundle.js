@@ -21562,7 +21562,10 @@
 	    value: function handleSearch(newFilter) {
 	      var _this2 = this;
 	
-	      this.setState({ filter: newFilter, page: 1 }, function () {
+	      this.setState({
+	        filter: newFilter,
+	        page: 1
+	      }, function () {
 	        _this2.fetchData();
 	      });
 	    }
@@ -21571,7 +21574,10 @@
 	    value: function handleChangeLimit(newLimit) {
 	      var _this3 = this;
 	
-	      this.setState({ limit: newLimit, page: 1 }, function () {
+	      this.setState({
+	        limit: newLimit,
+	        page: 1
+	      }, function () {
 	        _this3.fetchData();
 	      });
 	    }
@@ -21580,7 +21586,9 @@
 	    value: function handlePagination(newPage) {
 	      var _this4 = this;
 	
-	      this.setState({ page: newPage }, function () {
+	      this.setState({
+	        page: newPage
+	      }, function () {
 	        _this4.fetchData();
 	      });
 	    }
@@ -21591,9 +21599,9 @@
 	
 	      event.preventDefault();
 	      var column = event.target.getAttribute('value');
-	      var sort = 'asc';
-	      if (this.state.order.column == event.target.getAttribute('value')) {
-	        sort = this.state.order.sort == 'asc' ? 'desc' : 'asc';
+	      var sort = this.state.order.sort;
+	      if (this.state.order.column === column) {
+	        sort = this.state.order.sort === 'asc' ? 'desc' : 'asc';
 	      }
 	      this.setState({ order: {
 	          column: column,
@@ -23806,10 +23814,10 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        { className: '' },
+	        { className: 'wrapper' },
 	        _react2.default.createElement(
 	          'header',
-	          { role: '' },
+	          null,
 	          _react2.default.createElement(
 	            'h2',
 	            null,
@@ -23818,7 +23826,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { role: '' },
+	          null,
 	          _react2.default.createElement(
 	            'div',
 	            { className: '' },
@@ -23827,13 +23835,12 @@
 	              { className: '' },
 	              _react2.default.createElement(
 	                'div',
-	                { className: '' },
+	                { className: 'toolbar' },
 	                _react2.default.createElement(
 	                  'div',
 	                  { className: '' },
 	                  _react2.default.createElement(_TableFilter2.default, { filter: filter,
-	                    handleSearch: handleSearch
-	                  })
+	                    handleSearch: handleSearch })
 	                ),
 	                _react2.default.createElement(
 	                  'div',
@@ -23843,7 +23850,7 @@
 	              ),
 	              _react2.default.createElement(
 	                'table',
-	                { className: '' },
+	                { className: 'table' },
 	                _react2.default.createElement(
 	                  'thead',
 	                  null,
@@ -23859,7 +23866,7 @@
 	              ),
 	              _react2.default.createElement(
 	                'div',
-	                { className: '' },
+	                { className: 'footer' },
 	                _react2.default.createElement(
 	                  'div',
 	                  { className: '' },
@@ -23867,7 +23874,7 @@
 	                ),
 	                _react2.default.createElement(
 	                  'div',
-	                  { className: 'c' },
+	                  { className: '' },
 	                  _react2.default.createElement(_TablePagination2.default, { handlePagination: handlePagination, limit: limit, all_records: all_records, page: this.props.page })
 	                )
 	              )
@@ -24067,18 +24074,9 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        { id: 'dt_basic_filter', className: 'dataTables_filter' },
-	        _react2.default.createElement(
-	          'label',
-	          null,
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'input-group-addon' },
-	            _react2.default.createElement('i', { className: 'glyphicon glyphicon-search' })
-	          ),
-	          _react2.default.createElement('input', { type: 'search', className: 'form-control', placeholder: '', value: this.state.filter,
-	            onChange: this.handleChange, onKeyPress: this.handleKeyPress })
-	        )
+	        { className: 'filter-box' },
+	        _react2.default.createElement('input', { type: 'search', className: '', placeholder: 'Search...', value: this.state.filter,
+	          onChange: this.handleChange, onKeyPress: this.handleKeyPress })
 	      );
 	    }
 	  }]);
@@ -24120,8 +24118,6 @@
 	
 	    var _this = _possibleConstructorReturn(this, (TableLength.__proto__ || Object.getPrototypeOf(TableLength)).call(this, props));
 	
-	    _this.state = { value: _this.props.limit };
-	
 	    _this.handleChange = _this.handleChange.bind(_this);
 	    return _this;
 	  }
@@ -24129,41 +24125,36 @@
 	  _createClass(TableLength, [{
 	    key: 'handleChange',
 	    value: function handleChange(event) {
-	      this.setState({ value: event.target.value });
-	      this.props.handleChangeLimit(event.target.value);
+	      this.props.handleChangeLimit(parseInt(event.target.value, 0));
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'dataTables_length' },
+	        { className: 'length-box' },
 	        _react2.default.createElement(
-	          'label',
-	          null,
+	          'select',
+	          { className: '', onChange: this.handleChange },
 	          _react2.default.createElement(
-	            'select',
-	            { name: 'dt_basic_length', className: 'form-control', onChange: this.handleChange },
-	            _react2.default.createElement(
-	              'option',
-	              { value: '10' },
-	              '10'
-	            ),
-	            _react2.default.createElement(
-	              'option',
-	              { value: '25' },
-	              '25'
-	            ),
-	            _react2.default.createElement(
-	              'option',
-	              { value: '50' },
-	              '50'
-	            ),
-	            _react2.default.createElement(
-	              'option',
-	              { value: '100' },
-	              '100'
-	            )
+	            'option',
+	            { value: '3' },
+	            '3'
+	          ),
+	          _react2.default.createElement(
+	            'option',
+	            { value: '5' },
+	            '5'
+	          ),
+	          _react2.default.createElement(
+	            'option',
+	            { value: '10' },
+	            '10'
+	          ),
+	          _react2.default.createElement(
+	            'option',
+	            { value: '25' },
+	            '25'
 	          )
 	        )
 	      );
@@ -24172,6 +24163,10 @@
 	
 	  return TableLength;
 	}(_react2.default.Component);
+	
+	TableLength.propTypes = {
+	  handleChangeLimit: _react2.default.PropTypes.func.isRequired
+	};
 	
 	exports.default = TableLength;
 
@@ -24354,8 +24349,8 @@
 	    key: 'onClick',
 	    value: function onClick(event) {
 	      event.preventDefault();
-	      var newPage = event.target.getAttribute('value');
-	      this.props.handlePagination(event.target.getAttribute('value'));
+	      var newPage = parseInt(event.target.getAttribute('value'), 0);
+	      this.props.handlePagination(newPage);
 	    }
 	  }, {
 	    key: 'renderPreviousButtons',
@@ -24364,7 +24359,7 @@
 	      var faClassName = start ? 'fa fa-angle-double-left' : 'fa fa-angle-left';
 	      return _react2.default.createElement(
 	        'li',
-	        { className: liClassName, id: 'dt_basic_previous' },
+	        { className: 'paginate-button' },
 	        _react2.default.createElement(
 	          'a',
 	          { href: '#', onClick: this.onClick, value: start || pageNumber == 1 ? 1 : pageNumber - 1 },
@@ -24379,11 +24374,11 @@
 	      var faClassName = end ? 'fa fa-angle-double-right' : 'fa fa-angle-right';
 	      return _react2.default.createElement(
 	        'li',
-	        { className: liClassName, id: 'dt_basic_previous' },
+	        { className: 'paginate-button' },
 	        _react2.default.createElement(
 	          'a',
 	          { href: '#', onClick: this.onClick, value: end || pagesCount == pageNumber ? pagesCount : pageNumber + 1 },
-	          _react2.default.createElement('i', { className: faClassName })
+	          _react2.default.createElement('i', { className: 'fa fa-angle-left' })
 	        )
 	      );
 	    }
@@ -24400,10 +24395,10 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'dataTables_paginate paging_simple_numbers', id: 'dt_basic_paginate' },
+	        { className: '' },
 	        _react2.default.createElement(
 	          'ul',
-	          { className: 'pagination pagination-sm' },
+	          { className: 'pagination-list' },
 	          this.renderPreviousButtons(true, page),
 	          this.renderPreviousButtons(false, page),
 	          pagesList.map(function (pageNumber) {
@@ -24460,7 +24455,7 @@
 	      var className = this.props.isActive ? 'paginate_button active' : 'paginate_button';
 	      return _react2.default.createElement(
 	        'li',
-	        { className: className },
+	        { className: 'paginate-button' },
 	        _react2.default.createElement(
 	          'a',
 	          { onClick: this.props.onClick, href: '#', value: this.props.pageNumber },
@@ -24546,7 +24541,7 @@
 	var content = __webpack_require__(220);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(222)(content, {});
+	var update = __webpack_require__(221)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -24566,74 +24561,19 @@
 /* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(221)();
+	exports = module.exports = __webpack_require__(222)();
 	// imports
-	
+	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Roboto);", ""]);
+	exports.push([module.id, "@import url(https://use.fontawesome.com/d2b6c53020.js);", ""]);
 	
 	// module
-	exports.push([module.id, "div {\n  background-color: red; }\n", "", {"version":3,"sources":["/./src/client/styles/src/client/styles/main.scss"],"names":[],"mappings":"AAAA;EACC,sBAAsB,EACtB","file":"main.scss","sourcesContent":["div {\r\n\tbackground-color: red;\r\n}"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\nbody {\n  font-family: 'Roboto', sans-serif; }\n\n.wrapper {\n  margin: 0 0 30px;\n  position: relative;\n  border-radius: 0;\n  padding: 0; }\n\n.wrapper > header {\n  border-color: red;\n  background-color: red;\n  display: flex;\n  align-items: center;\n  color: #fff;\n  height: 40px; }\n\nheader > h2 {\n  padding: 0 10px; }\n\n.toolbar {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  height: 40px;\n  padding: 0 10px; }\n\n.table {\n  width: 100%; }\n\n.table > thead a {\n  text-decoration: none; }\n\n.table tr {\n  height: 30px; }\n  .table tr td, .table tr th {\n    line-height: 30px;\n    text-align: left;\n    padding-left: 10px; }\n  .table tr th {\n    text-transform: uppercase; }\n\ntr:nth-child(2n) {\n  background-color: blue; }\n\n.filter-box > input {\n  height: 26px;\n  padding: 0 10px; }\n\n.length-box > select {\n  height: 26px; }\n\n.footer {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 10px;\n  height: 40px; }\n\n.pagination-list {\n  display: flex;\n  justify-content: flex-end; }\n\n.paginate-button {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  margin-right: -1px;\n  height: 26px;\n  width: 26px;\n  border: 1px solid black; }\n\n.paginate-button > a {\n  text-decoration: none; }\n", "", {"version":3,"sources":["/./src/client/styles/src/client/styles/reset.scss","/./src/client/styles/src/client/styles/main.scss"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;EAaC,UAAU;EACV,WAAW;EACX,UAAU;EACV,gBAAgB;EAChB,cAAc;EACd,yBAAyB,EACzB;;AACD,iDAAiD;AACjD;;EAEC,eAAe,EACf;;AACD;EACC,eAAe,EACf;;AACD;EACC,iBAAiB,EACjB;;AACD;EACC,aAAa,EACb;;AACD;;EAEC,YAAY;EACZ,cAAc,EACd;;AACD;EACC,0BAA0B;EAC1B,kBAAkB,EAClB;;ACtCD;EACC,kCAAkC,EAClC;;AAED;EACC,iBAAiB;EAChB,mBAAmB;EACnB,iBAAiB;EACjB,WAAW,EACZ;;AAED;EACE,kBAAkB;EAClB,sBAAsB;EACtB,cAAc;EACd,oBAAoB;EACpB,YAAY;EACZ,aAAa,EACd;;AAED;EACC,gBAAgB,EAChB;;AAED;EACC,cAAc;EACd,+BAA+B;EAC/B,oBAAoB;EACpB,aAAa;EACb,gBAAgB,EAChB;;AAED;EACC,YAAY,EACZ;;AAED;EACC,sBAAsB,EACtB;;AAED;EACC,aAAa,EASb;EAVD;IAGE,kBAAkB;IAClB,iBAAiB;IACjB,mBAAmB,EACnB;EANF;IAQE,0BAA0B,EAC1B;;AAGF;EACC,uBAAuB,EACvB;;AAED;EACC,aAAa;EACb,gBAAgB,EAChB;;AAED;EACC,aAAa,EACb;;AAED;EACC,cAAc;EACd,+BAA+B;EAC/B,oBAAoB;EACpB,gBAAgB;EAChB,aAAa,EACb;;AAED;EACC,cAAc;EACd,0BAA0B,EAC1B;;AAED;EACC,cAAc;EACd,oBAAoB;EACpB,wBAAwB;EACxB,mBAAmB;EACnB,aAAa;EACb,YAAY;EACZ,wBAAwB,EACxB;;AAED;EACC,sBAAsB,EACtB","file":"main.scss","sourcesContent":["html, body, div, span, applet, object, iframe,\r\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\r\na, abbr, acronym, address, big, cite, code,\r\ndel, dfn, em, img, ins, kbd, q, s, samp,\r\nsmall, strike, strong, sub, sup, tt, var,\r\nb, u, i, center,\r\ndl, dt, dd, ol, ul, li,\r\nfieldset, form, label, legend,\r\ntable, caption, tbody, tfoot, thead, tr, th, td,\r\narticle, aside, canvas, details, embed, \r\nfigure, figcaption, footer, header, hgroup, \r\nmenu, nav, output, ruby, section, summary,\r\ntime, mark, audio, video {\r\n\tmargin: 0;\r\n\tpadding: 0;\r\n\tborder: 0;\r\n\tfont-size: 100%;\r\n\tfont: inherit;\r\n\tvertical-align: baseline;\r\n}\r\n/* HTML5 display-role reset for older browsers */\r\narticle, aside, details, figcaption, figure, \r\nfooter, header, hgroup, menu, nav, section {\r\n\tdisplay: block;\r\n}\r\nbody {\r\n\tline-height: 1;\r\n}\r\nol, ul {\r\n\tlist-style: none;\r\n}\r\nblockquote, q {\r\n\tquotes: none;\r\n}\r\nblockquote:before, blockquote:after,\r\nq:before, q:after {\r\n\tcontent: '';\r\n\tcontent: none;\r\n}\r\ntable {\r\n\tborder-collapse: collapse;\r\n\tborder-spacing: 0;\r\n}","@import 'reset';\r\n@import url('https://fonts.googleapis.com/css?family=Roboto');\r\n@import url('https://use.fontawesome.com/d2b6c53020.js');\r\n\r\nbody {\r\n\tfont-family: 'Roboto', sans-serif;\r\n}\r\n\r\n.wrapper {\r\n\tmargin: 0 0 30px;\r\n  position: relative;\r\n  border-radius: 0;\r\n  padding: 0;\r\n}\r\n\r\n.wrapper > header {\r\n  border-color: red;\r\n  background-color: red;\r\n  display: flex;\r\n  align-items: center;\r\n  color: #fff;\r\n  height: 40px;\r\n}\r\n\r\nheader > h2 {\r\n\tpadding: 0 10px;\r\n}\r\n\r\n.toolbar {\r\n\tdisplay: flex;\r\n\tjustify-content: space-between;\r\n\talign-items: center;\r\n\theight: 40px;\r\n\tpadding: 0 10px;\r\n}\r\n\r\n.table {\r\n\twidth: 100%;\r\n}\r\n\r\n.table > thead a {\r\n\ttext-decoration: none;\r\n}\r\n\r\n.table tr {\r\n\theight: 30px;\r\n\t& td, th {\r\n\t\tline-height: 30px;\r\n\t\ttext-align: left;\r\n\t\tpadding-left: 10px;\r\n\t}\r\n\t& th {\r\n\t\ttext-transform: uppercase;\r\n\t}\r\n}\r\n\r\ntr:nth-child(2n) {\r\n\tbackground-color: blue;\r\n}\r\n\r\n.filter-box > input {\r\n\theight: 26px;\r\n\tpadding: 0 10px;\r\n}\r\n\r\n.length-box > select {\r\n\theight: 26px;\r\n}\r\n\r\n.footer {\r\n\tdisplay: flex;\r\n\tjustify-content: space-between;\r\n\talign-items: center;\r\n\tpadding: 0 10px;\r\n\theight: 40px;\r\n}\r\n\r\n.pagination-list {\r\n\tdisplay: flex;\r\n\tjustify-content: flex-end;\r\n}\r\n\r\n.paginate-button {\r\n\tdisplay: flex;\r\n\talign-items: center;\r\n\tjustify-content: center;\r\n\tmargin-right: -1px;\r\n\theight: 26px;\r\n\twidth: 26px;\r\n\tborder: 1px solid black;\r\n}\r\n\r\n.paginate-button > a {\r\n\ttext-decoration: none;\r\n}"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
 
 /***/ },
 /* 221 */
-/***/ function(module, exports) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function() {
-		var list = [];
-	
-		// return the list of modules as css string
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-	
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
-
-
-/***/ },
-/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -24882,6 +24822,62 @@
 		if(oldSrc)
 			URL.revokeObjectURL(oldSrc);
 	}
+
+
+/***/ },
+/* 222 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+	
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+	
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
 
 
 /***/ }

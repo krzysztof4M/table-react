@@ -3,30 +3,30 @@ import React from 'react'
 class TableLength extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: this.props.limit};
 
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
-    this.setState({value: event.target.value});
-    this.props.handleChangeLimit(event.target.value);
+    this.props.handleChangeLimit(parseInt(event.target.value,0));
   }
 
   render() {
     return (
-      <div className='dataTables_length'>
-        <label>
-          <select name='dt_basic_length' className='form-control' onChange={this.handleChange}>
+      <div className='length-box'>
+          <select className='' onChange={this.handleChange}>
+            <option value='3'>3</option>
+            <option value='5'>5</option>
             <option value='10'>10</option>
             <option value='25'>25</option>
-            <option value='50'>50</option>
-            <option value='100'>100</option>
           </select>
-        </label>
       </div>
     )
   }
+}
+
+TableLength.propTypes = {
+  handleChangeLimit: React.PropTypes.func.isRequired
 }
 
 export default TableLength

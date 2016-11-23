@@ -1,3 +1,95 @@
-div {
-	background-color: red;
+@import 'reset';
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://use.fontawesome.com/d2b6c53020.js');
+
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+.wrapper {
+	margin: 0 0 30px;
+  position: relative;
+  border-radius: 0;
+  padding: 0;
+}
+
+.wrapper > header {
+  border-color: red;
+  background-color: red;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  height: 40px;
+}
+
+header > h2 {
+	padding: 0 10px;
+}
+
+.toolbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 40px;
+	padding: 0 10px;
+}
+
+.table {
+	width: 100%;
+}
+
+.table > thead a {
+	text-decoration: none;
+}
+
+.table tr {
+	height: 30px;
+	& td, th {
+		line-height: 30px;
+		text-align: left;
+		padding-left: 10px;
+	}
+	& th {
+		text-transform: uppercase;
+	}
+}
+
+tr:nth-child(2n) {
+	background-color: blue;
+}
+
+.filter-box > input {
+	height: 26px;
+	padding: 0 10px;
+}
+
+.length-box > select {
+	height: 26px;
+}
+
+.footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 10px;
+	height: 40px;
+}
+
+.pagination-list {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.paginate-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: -1px;
+	height: 26px;
+	width: 26px;
+	border: 1px solid black;
+}
+
+.paginate-button > a {
+	text-decoration: none;
 }
