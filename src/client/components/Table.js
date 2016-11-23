@@ -13,23 +13,24 @@ class Table extends React.Component {
 
   displayBody() {
     if (this.props.isLoading) {
-      return <Loader />
+      return <Loader length={this.props.headers.length} />
     }
     let content = !this.props.data.length ? <TablePlaceholder length={this.props.headers.length} /> : this.props.data.map((el,i) => <TableRow key={i} data={el} />)
     return content
   }
 
-  render() {      
+  render() {
+    const { title } = this.props       
     return (
-      <div className='jarviswidget jarviswidget-color-darken jarviswidget-sortable'>
-        <header role='heading'>
-          <h2>Publikacje naukowe</h2>
+      <div className=''>
+        <header role=''>
+          <h2>{title}</h2>
         </header>
-        <div role='content'>
-          <div className='widget-body no-padding'>
-            <div className='dataTables_wrapper form-inline no-footer'>
-              <div className='dt-toolbar'>
-                <div className='col-xs-12 col-sm-6'>
+        <div role=''>
+          <div className=''>
+            <div className=''>
+              <div className=''>
+                <div className=''>
                   <TableFilter  filter={this.props.filter} 
                                 handleSearch={this.props.handleSearch}
                   />
@@ -67,6 +68,7 @@ class Table extends React.Component {
 }
 
 Table.propTypes = {
+  title: React.PropTypes.string.isRequired,
   data: React.PropTypes.array.isRequired,
   headers: React.PropTypes.array.isRequired,  
   all_records: React.PropTypes.number.isRequired,
@@ -74,6 +76,10 @@ Table.propTypes = {
   page: React.PropTypes.number.isRequired,
   limit: React.PropTypes.number.isRequired,
   filter: React.PropTypes.string.isRequired,
+  handlePagination: React.PropTypes.func.isRequired,
+  handleSort: React.PropTypes.func.isRequired,
+  handleChangeLimit: React.PropTypes.func.isRequired,
+  handleSearch: React.PropTypes.func.isRequired
 }
 
 export default Table

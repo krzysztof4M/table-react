@@ -64,7 +64,7 @@
 	
 	// eslint-disable-line no-unused-vars
 	
-	(0, _reactDom.render)(_react2.default.createElement(_TableContainer2.default, { url: 'api/data' }), document.getElementById('app'));
+	(0, _reactDom.render)(_react2.default.createElement(_TableContainer2.default, { url: 'api/data', title: 'Items list' }), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -21560,27 +21560,35 @@
 	  }, {
 	    key: 'handleSearch',
 	    value: function handleSearch(newFilter) {
+	      var _this2 = this;
+	
 	      this.setState({ filter: newFilter, page: 1 }, function () {
-	        this.fetchData();
+	        _this2.fetchData();
 	      });
 	    }
 	  }, {
 	    key: 'handleChangeLimit',
 	    value: function handleChangeLimit(newLimit) {
+	      var _this3 = this;
+	
 	      this.setState({ limit: newLimit, page: 1 }, function () {
-	        this.fetchData();
+	        _this3.fetchData();
 	      });
 	    }
 	  }, {
 	    key: 'handlePagination',
 	    value: function handlePagination(newPage) {
+	      var _this4 = this;
+	
 	      this.setState({ page: newPage }, function () {
-	        this.fetchData();
+	        _this4.fetchData();
 	      });
 	    }
 	  }, {
 	    key: 'handleSort',
 	    value: function handleSort(event) {
+	      var _this5 = this;
+	
 	      event.preventDefault();
 	      var column = event.target.getAttribute('value');
 	      var sort = 'asc';
@@ -21591,7 +21599,7 @@
 	          column: column,
 	          sort: sort
 	        } }, function () {
-	        this.fetchData();
+	        _this5.fetchData();
 	      });
 	    }
 	  }, {
@@ -21605,14 +21613,20 @@
 	          all_records = _state2.all_records,
 	          headers = _state2.headers,
 	          data = _state2.data;
+	      var title = this.props.title;
 	
-	      return _react2.default.createElement(_Table2.default, { data: data,
+	      return _react2.default.createElement(_Table2.default, { title: title,
+	        data: data,
 	        headers: headers,
 	        all_records: all_records,
 	        isLoading: isLoading,
 	        page: page,
 	        limit: limit,
-	        filter: filter });
+	        filter: filter,
+	        handleSort: this.handleSort,
+	        handlePagination: this.handlePagination,
+	        handleSearch: this.handleSearch,
+	        handleChangeLimit: this.handleChangeLimit });
 	    }
 	  }]);
 	
@@ -21620,7 +21634,8 @@
 	}(_react2.default.Component);
 	
 	TableContainer.propTypes = {
-	  url: _react2.default.PropTypes.string.isRequired
+	  url: _react2.default.PropTypes.string.isRequired,
+	  title: _react2.default.PropTypes.string.isRequired
 	};
 	
 	exports.default = TableContainer;
@@ -23767,7 +23782,7 @@
 	    key: 'displayBody',
 	    value: function displayBody() {
 	      if (this.props.isLoading) {
-	        return _react2.default.createElement(_Loader2.default, null);
+	        return _react2.default.createElement(_Loader2.default, { length: this.props.headers.length });
 	      }
 	      var content = !this.props.data.length ? _react2.default.createElement(_TablePlaceholder2.default, { length: this.props.headers.length }) : this.props.data.map(function (el, i) {
 	        return _react2.default.createElement(_TableRow2.default, { key: i, data: el });
@@ -23777,33 +23792,35 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var title = this.props.title;
+	
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'jarviswidget jarviswidget-color-darken jarviswidget-sortable' },
+	        { className: '' },
 	        _react2.default.createElement(
 	          'header',
-	          { role: 'heading' },
+	          { role: '' },
 	          _react2.default.createElement(
 	            'h2',
 	            null,
-	            'Publikacje naukowe'
+	            title
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { role: 'content' },
+	          { role: '' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'widget-body no-padding' },
+	            { className: '' },
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'dataTables_wrapper form-inline no-footer' },
+	              { className: '' },
 	              _react2.default.createElement(
 	                'div',
-	                { className: 'dt-toolbar' },
+	                { className: '' },
 	                _react2.default.createElement(
 	                  'div',
-	                  { className: 'col-xs-12 col-sm-6' },
+	                  { className: '' },
 	                  _react2.default.createElement(_TableFilter2.default, { filter: this.props.filter,
 	                    handleSearch: this.props.handleSearch
 	                  })
@@ -23855,13 +23872,18 @@
 	}(_react2.default.Component);
 	
 	Table.propTypes = {
+	  title: _react2.default.PropTypes.string.isRequired,
 	  data: _react2.default.PropTypes.array.isRequired,
 	  headers: _react2.default.PropTypes.array.isRequired,
 	  all_records: _react2.default.PropTypes.number.isRequired,
 	  isLoading: _react2.default.PropTypes.bool.isRequired,
 	  page: _react2.default.PropTypes.number.isRequired,
 	  limit: _react2.default.PropTypes.number.isRequired,
-	  filter: _react2.default.PropTypes.string.isRequired
+	  filter: _react2.default.PropTypes.string.isRequired,
+	  handlePagination: _react2.default.PropTypes.func.isRequired,
+	  handleSort: _react2.default.PropTypes.func.isRequired,
+	  handleChangeLimit: _react2.default.PropTypes.func.isRequired,
+	  handleSearch: _react2.default.PropTypes.func.isRequired
 	};
 	
 	exports.default = Table;
@@ -24060,7 +24082,7 @@
 /* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -24095,42 +24117,42 @@
 	  }
 	
 	  _createClass(TableLength, [{
-	    key: "handleChange",
+	    key: 'handleChange',
 	    value: function handleChange(event) {
 	      this.setState({ value: event.target.value });
 	      this.props.handleChangeLimit(event.target.value);
 	    }
 	  }, {
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "dataTables_length" },
+	        'div',
+	        { className: 'dataTables_length' },
 	        _react2.default.createElement(
-	          "label",
+	          'label',
 	          null,
 	          _react2.default.createElement(
-	            "select",
-	            { name: "dt_basic_length", className: "form-control", onChange: this.handleChange },
+	            'select',
+	            { name: 'dt_basic_length', className: 'form-control', onChange: this.handleChange },
 	            _react2.default.createElement(
-	              "option",
-	              { value: "10" },
-	              "10"
+	              'option',
+	              { value: '10' },
+	              '10'
 	            ),
 	            _react2.default.createElement(
-	              "option",
-	              { value: "25" },
-	              "25"
+	              'option',
+	              { value: '25' },
+	              '25'
 	            ),
 	            _react2.default.createElement(
-	              "option",
-	              { value: "50" },
-	              "50"
+	              'option',
+	              { value: '50' },
+	              '50'
 	            ),
 	            _react2.default.createElement(
-	              "option",
-	              { value: "100" },
-	              "100"
+	              'option',
+	              { value: '100' },
+	              '100'
 	            )
 	          )
 	        )
@@ -24147,7 +24169,7 @@
 /* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -24177,22 +24199,22 @@
 	  }
 	
 	  _createClass(TableHeader, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      var _props = this.props,
 	          headers = _props.headers,
 	          handleSort = _props.handleSort;
 	
 	      return _react2.default.createElement(
-	        "tr",
+	        'tr',
 	        null,
 	        Object.keys(headers).map(function (el, i) {
 	          return _react2.default.createElement(
-	            "th",
+	            'th',
 	            { key: i },
 	            _react2.default.createElement(
-	              "a",
-	              { href: "#", value: el, onClick: handleSort },
+	              'a',
+	              { href: '#', value: el, onClick: handleSort },
 	              headers[el]
 	            )
 	          );
@@ -24210,7 +24232,7 @@
 /* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -24240,7 +24262,7 @@
 	  }
 	
 	  _createClass(TableCounter, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      var _props = this.props,
 	          page = _props.page,
@@ -24248,27 +24270,27 @@
 	          all_records = _props.all_records;
 	
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "dataTables_info" },
-	        "Showing ",
+	        'div',
+	        { className: 'dataTables_info' },
+	        'Showing ',
 	        _react2.default.createElement(
-	          "span",
-	          { className: "txt-color-darken" },
+	          'span',
+	          { className: 'txt-color-darken' },
 	          (page - 1) * limit + 1
 	        ),
-	        " to ",
+	        ' to ',
 	        _react2.default.createElement(
-	          "span",
-	          { className: "txt-color-darken" },
+	          'span',
+	          { className: 'txt-color-darken' },
 	          Math.min(page * limit, all_records)
 	        ),
-	        " of ",
+	        ' of ',
 	        _react2.default.createElement(
-	          "span",
-	          { className: "text-primary" },
+	          'span',
+	          { className: 'text-primary' },
 	          all_records
 	        ),
-	        " entries"
+	        ' entries'
 	      );
 	    }
 	  }]);
@@ -24328,8 +24350,8 @@
 	  }, {
 	    key: 'renderPreviousButtons',
 	    value: function renderPreviousButtons(start, pageNumber) {
-	      var liClassName = pageNumber == 1 ? "paginate_button previous disabled" : "paginate_button previous";
-	      var faClassName = start ? "fa fa-angle-double-left" : "fa fa-angle-left";
+	      var liClassName = pageNumber == 1 ? 'paginate_button previous disabled' : 'paginate_button previous';
+	      var faClassName = start ? 'fa fa-angle-double-left' : 'fa fa-angle-left';
 	      return _react2.default.createElement(
 	        'li',
 	        { className: liClassName, id: 'dt_basic_previous' },
@@ -24343,8 +24365,8 @@
 	  }, {
 	    key: 'renderNextButtons',
 	    value: function renderNextButtons(end, pageNumber, pagesCount) {
-	      var liClassName = pageNumber == pagesCount ? "paginate_button next disabled" : "paginate_button next";
-	      var faClassName = end ? "fa fa-angle-double-right" : "fa fa-angle-right";
+	      var liClassName = pageNumber == pagesCount ? 'paginate_button next disabled' : 'paginate_button next';
+	      var faClassName = end ? 'fa fa-angle-double-right' : 'fa fa-angle-right';
 	      return _react2.default.createElement(
 	        'li',
 	        { className: liClassName, id: 'dt_basic_previous' },
@@ -24393,7 +24415,7 @@
 /* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -24423,15 +24445,15 @@
 	  }
 	
 	  _createClass(PaginationLink, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
-	      var className = this.props.isActive ? "paginate_button active" : "paginate_button";
+	      var className = this.props.isActive ? 'paginate_button active' : 'paginate_button';
 	      return _react2.default.createElement(
-	        "li",
+	        'li',
 	        { className: className },
 	        _react2.default.createElement(
-	          "a",
-	          { onClick: this.props.onClick, href: "#", value: this.props.pageNumber },
+	          'a',
+	          { onClick: this.props.onClick, href: '#', value: this.props.pageNumber },
 	          this.props.pageNumber
 	        )
 	      );
@@ -24447,7 +24469,7 @@
 /* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -24477,113 +24499,30 @@
 	  }
 	
 	  _createClass(TableRow, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
-	      var _props$data = this.props.data,
-	          id = _props$data.id,
-	          name = _props$data.name,
-	          type = _props$data.type,
-	          status = _props$data.status,
-	          year = _props$data.year,
-	          added_person = _props$data.added_person,
-	          added_time = _props$data.added_time,
-	          actions_url = _props$data.actions_url,
-	          journal = _props$data.journal;
+	      var data = this.props.data;
 	
 	      return _react2.default.createElement(
-	        "tr",
+	        'tr',
 	        null,
-	        _react2.default.createElement(
-	          "td",
-	          null,
-	          id
-	        ),
-	        _react2.default.createElement(
-	          "td",
-	          null,
-	          name,
-	          " ",
-	          _react2.default.createElement(
-	            "p",
-	            null,
-	            journal
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "td",
-	          null,
-	          type
-	        ),
-	        _react2.default.createElement(
-	          "td",
-	          null,
-	          year
-	        ),
-	        _react2.default.createElement(
-	          "td",
-	          null,
-	          added_person
-	        ),
-	        _react2.default.createElement(
-	          "td",
-	          { style: { "minWidth": "70px" } },
-	          added_time
-	        ),
-	        _react2.default.createElement(
-	          "td",
-	          null,
-	          status
-	        ),
-	        _react2.default.createElement(
-	          "td",
-	          null,
-	          _react2.default.createElement(
-	            "ul",
-	            { className: "demo-btns" },
-	            _react2.default.createElement(
-	              "li",
-	              null,
-	              _react2.default.createElement(
-	                "a",
-	                { href: actions_url.details, className: "btn btn-default btn-sm" },
-	                _react2.default.createElement("i", { className: "fa fa-search fa-lg" })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              "li",
-	              null,
-	              _react2.default.createElement(
-	                "a",
-	                { href: actions_url.edition, className: "btn btn-default btn-sm" },
-	                _react2.default.createElement("i", { className: "fa fa-pencil fa-lg" })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              "li",
-	              null,
-	              _react2.default.createElement(
-	                "a",
-	                { href: actions_url.delete, className: "btn btn-default btn-sm" },
-	                _react2.default.createElement("i", { className: "fa fa-trash-o fa-lg" })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              "li",
-	              null,
-	              _react2.default.createElement(
-	                "a",
-	                { href: actions_url.version, className: "btn btn-default btn-sm" },
-	                _react2.default.createElement("i", { className: "fa fa-files-o fa-lg" })
-	              )
-	            )
-	          )
-	        )
+	        Object.keys(data).map(function (el, i) {
+	          return _react2.default.createElement(
+	            'td',
+	            { key: i },
+	            data[el]
+	          );
+	        })
 	      );
 	    }
 	  }]);
 	
 	  return TableRow;
 	}(_react2.default.Component);
+	
+	TableRow.propTypes = {
+	  data: _react2.default.PropTypes.object.isRequired
+	};
 	
 	exports.default = TableRow;
 

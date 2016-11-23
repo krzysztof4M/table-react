@@ -61,19 +61,19 @@ class TableContainer extends React.Component {
   }
 
   handleSearch(newFilter) {     
-    this.setState({filter : newFilter, page: 1}, function() {
+    this.setState({filter : newFilter, page: 1}, () => {
         this.fetchData();   
     });
   }
 
   handleChangeLimit(newLimit) {
-    this.setState({limit : newLimit, page: 1}, function() {
+    this.setState({limit : newLimit, page: 1}, () => {
         this.fetchData();   
     });
   }
 
   handlePagination(newPage) {
-    this.setState({page: newPage}, function() {
+    this.setState({page: newPage}, () => {
         this.fetchData();   
     });
   }
@@ -88,27 +88,34 @@ class TableContainer extends React.Component {
     this.setState({order: {
       column: column,
       sort: sort
-    }}, function() {
+    }}, () => {
         this.fetchData();   
     });
   }
 
   render() {
     const { filter, limit, page, isLoading, all_records, headers, data } = this.state 
+    const { title } = this.props
     return (
-      <Table  data={data}
+      <Table  title={title}
+              data={data}
               headers={headers}
               all_records={all_records}
               isLoading={isLoading}
               page={page}
               limit={limit}
-              filter={filter} />
+              filter={filter}
+              handleSort={this.handleSort}
+              handlePagination={this.handlePagination}
+              handleSearch={this.handleSearch}
+              handleChangeLimit={this.handleChangeLimit} />
     )
   }
 }
 
 TableContainer.propTypes = {
-  url: React.PropTypes.string.isRequired
+  url: React.PropTypes.string.isRequired,
+  title: React.PropTypes.string.isRequired
 }
 
 export default TableContainer
