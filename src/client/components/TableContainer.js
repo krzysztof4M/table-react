@@ -13,7 +13,7 @@ class TableContainer extends React.Component {
       headers: [],
       all_records: 0,
       filter: '',
-      limit: 10,
+      limit: 3,
       page: 1,
       order: {
         column: 'id',
@@ -61,13 +61,13 @@ class TableContainer extends React.Component {
   }
 
   handleSearch(newFilter) {     
-    this.setState({filter : newFilter, page: 1}, () => {
+    this.setState({filter: newFilter, page: 1}, () => {
         this.fetchData();   
     });
   }
 
   handleChangeLimit(newLimit) {
-    this.setState({limit : newLimit, page: 1}, () => {
+    this.setState({limit: newLimit, page: 1}, () => {
         this.fetchData();   
     });
   }

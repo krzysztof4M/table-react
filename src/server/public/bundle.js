@@ -21503,7 +21503,7 @@
 	      headers: [],
 	      all_records: 0,
 	      filter: '',
-	      limit: 10,
+	      limit: 3,
 	      page: 1,
 	      order: {
 	        column: 'id',
@@ -23792,7 +23792,17 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var title = this.props.title;
+	      var _props = this.props,
+	          title = _props.title,
+	          filter = _props.filter,
+	          headers = _props.headers,
+	          handleSearch = _props.handleSearch,
+	          all_records = _props.all_records,
+	          page = _props.page,
+	          limit = _props.limit,
+	          handlePagination = _props.handlePagination,
+	          handleChangeLimit = _props.handleChangeLimit,
+	          handleSort = _props.handleSort;
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -23821,24 +23831,24 @@
 	                _react2.default.createElement(
 	                  'div',
 	                  { className: '' },
-	                  _react2.default.createElement(_TableFilter2.default, { filter: this.props.filter,
-	                    handleSearch: this.props.handleSearch
+	                  _react2.default.createElement(_TableFilter2.default, { filter: filter,
+	                    handleSearch: handleSearch
 	                  })
 	                ),
 	                _react2.default.createElement(
 	                  'div',
-	                  { className: 'col-sm-6 col-xs-12 hidden-xs' },
-	                  _react2.default.createElement(_TableLength2.default, { handleChangeLimit: this.props.handleChangeLimit })
+	                  { className: '' },
+	                  _react2.default.createElement(_TableLength2.default, { handleChangeLimit: handleChangeLimit })
 	                )
 	              ),
 	              _react2.default.createElement(
 	                'table',
-	                { className: 'table table-striped table-bordered table-hover dataTable no-footer' },
+	                { className: '' },
 	                _react2.default.createElement(
 	                  'thead',
 	                  null,
-	                  _react2.default.createElement(_TableHeader2.default, { headers: this.props.headers,
-	                    handleSort: this.props.handleSort
+	                  _react2.default.createElement(_TableHeader2.default, { headers: headers,
+	                    handleSort: handleSort
 	                  })
 	                ),
 	                _react2.default.createElement(
@@ -23849,16 +23859,16 @@
 	              ),
 	              _react2.default.createElement(
 	                'div',
-	                { className: 'dt-toolbar-footer' },
+	                { className: '' },
 	                _react2.default.createElement(
 	                  'div',
-	                  { className: 'col-sm-6 col-xs-12 hidden-xs' },
-	                  _react2.default.createElement(_TableCounter2.default, { all_records: this.props.all_records, page: this.props.page, limit: this.props.limit })
+	                  { className: '' },
+	                  _react2.default.createElement(_TableCounter2.default, { all_records: all_records, page: page, limit: limit })
 	                ),
 	                _react2.default.createElement(
 	                  'div',
-	                  { className: 'col-xs-12 col-sm-6' },
-	                  _react2.default.createElement(_TablePagination2.default, { handlePagination: this.props.handlePagination, limit: this.props.limit, all_records: this.props.all_records, page: this.props.page })
+	                  { className: 'c' },
+	                  _react2.default.createElement(_TablePagination2.default, { handlePagination: handlePagination, limit: limit, all_records: all_records, page: this.props.page })
 	                )
 	              )
 	            )

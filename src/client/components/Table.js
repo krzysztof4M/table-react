@@ -20,7 +20,7 @@ class Table extends React.Component {
   }
 
   render() {
-    const { title } = this.props       
+    const { title, filter, headers,  handleSearch, all_records, page, limit, handlePagination, handleChangeLimit, handleSort } = this.props       
     return (
       <div className=''>
         <header role=''>
@@ -31,18 +31,18 @@ class Table extends React.Component {
             <div className=''>
               <div className=''>
                 <div className=''>
-                  <TableFilter  filter={this.props.filter} 
-                                handleSearch={this.props.handleSearch}
+                  <TableFilter  filter={filter} 
+                                handleSearch={handleSearch}
                   />
                 </div>
-                <div className='col-sm-6 col-xs-12 hidden-xs'>
-                  <TableLength handleChangeLimit={this.props.handleChangeLimit}/>
+                <div className=''>
+                  <TableLength handleChangeLimit={handleChangeLimit}/>
                 </div>
               </div>
-              <table className='table table-striped table-bordered table-hover dataTable no-footer'>
+              <table className=''>
                 <thead>
-                  <TableHeader  headers={this.props.headers}
-                                handleSort={this.props.handleSort}
+                  <TableHeader  headers={headers}
+                                handleSort={handleSort}
                   />
                 </thead>
                 <tbody>
@@ -51,12 +51,12 @@ class Table extends React.Component {
                   }
                 </tbody>
               </table>
-              <div className='dt-toolbar-footer'>
-                <div className='col-sm-6 col-xs-12 hidden-xs'>
-                  <TableCounter all_records={this.props.all_records} page={this.props.page} limit={this.props.limit} />
+              <div className=''>
+                <div className=''>
+                  <TableCounter all_records={all_records} page={page} limit={limit} />
                 </div>
-                <div className='col-xs-12 col-sm-6'>
-                  <TablePagination handlePagination={this.props.handlePagination} limit={this.props.limit} all_records={this.props.all_records} page={this.props.page} />
+                <div className='c'>
+                  <TablePagination handlePagination={handlePagination} limit={limit} all_records={all_records} page={this.props.page} />
                 </div>
               </div>
             </div>

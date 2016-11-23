@@ -14,7 +14,7 @@ var data = {
     { id: 7, name: 'Mononucleose', year: 2010, added_time: 1479496494, editor: 'Marry Blake' },
     { id: 8, name: 'Mononucleose', year: 2016, added_time: 1479856124, editor: 'John Doe' }
   ],
-  all_records: 4 
+  all_records: 8 
 }
 
 app.use(express.static(__dirname + '/public'));
