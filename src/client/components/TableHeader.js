@@ -7,7 +7,7 @@ class TableHeader extends React.Component {
       <tr>
         {
           Object.keys(headers).map((el,i) => 
-            <th key={i}><a href="#" value={el} onClick={handleSort}>{headers[el]}</a></th>
+            <th key={i}><a href='#' value={el} onClick={handleSort}>{headers[el]}</a></th>
           )
         }
       </tr>

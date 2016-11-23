@@ -22,12 +22,12 @@ class TableFilter extends React.Component {
   render() {
 
     return (
-      <div id="dt_basic_filter" className="dataTables_filter">
+      <div id='dt_basic_filter' className='dataTables_filter'>
         <label>
-          <span className="input-group-addon">
-            <i className="glyphicon glyphicon-search"></i>
+          <span className='input-group-addon'>
+            <i className='glyphicon glyphicon-search'></i>
           </span>
-          <input type="search" className="form-control" placeholder="" value={this.state.filter}
+          <input type='search' className='form-control' placeholder='' value={this.state.filter}
             onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
           
         </label>

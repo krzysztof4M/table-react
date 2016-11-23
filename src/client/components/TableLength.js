@@ -15,13 +15,13 @@ class TableLength extends React.Component {
 
   render() {
     return (
-      <div className="dataTables_length">
+      <div className='dataTables_length'>
         <label>
-          <select name="dt_basic_length" className="form-control" onChange={this.handleChange}>
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
+          <select name='dt_basic_length' className='form-control' onChange={this.handleChange}>
+            <option value='10'>10</option>
+            <option value='25'>25</option>
+            <option value='50'>50</option>
+            <option value='100'>100</option>
           </select>
         </label>
       </div>
