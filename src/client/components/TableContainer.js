@@ -1,5 +1,8 @@
 import React from 'react'
 import axios from 'axios'
+import Qs from 'qs'
+
+import Table from './Table'
 
 class TableContainer extends React.Component {
   constructor(props){
@@ -24,24 +27,25 @@ class TableContainer extends React.Component {
     this.handleSort = this.handleSort.bind(this);
   }
   componentDidMount(){
-    // let query = {
-    //   department_id: this.props.department_id,
-    //   type: this.props.type,
-    //   filter: this.state.filter,
-    //   limit: this.state.limit,
-    //   page: this.state.page,
-    //   order: this.state.order.column + '-' + this.state.order.sort
-    // }
     this.fetchData();
   }
 
   fetchData() {
+    const { filter, limit, page, order } = this.state
     const that = this
     this.setState({isLoading: true})
-    axios.get('api/data', {
-      params: this.getQuery()
+    axios.get(this.props.url, {
+      params:{
+        filter,
+        limit,
+        page,
+        order
+      },
+      paramsSerializer: function(params) {
+        return Qs.stringify(params, {arrayFormat: 'brackets'})
+      }
     })
-    .then(function (response) {
+    .then((response) => {
       that.setState({
         data: response.data.data,
         headers: response.data.headers,
@@ -49,32 +53,11 @@ class TableContainer extends React.Component {
         isLoading: false
       })
     })
-    .catch(function (error) {
+    .catch(() => {
       that.setState({
         isLoading: false
       })
     });
-  }
-
-  getQuery() {
-    const { department_id, type } = this.props
-    const { filter, limit, page, order } = this.state
-    
-    return {
-      department_id: department_id,
-      type: type,
-      filter: filter,
-      limit: limit,
-      page: page,
-      order: order.column + '-' + order.sort
-    }
-  }
-
-  displayView(){
-    const { filter, limit, page, isLoading, all_records, headers, data } = this.state 
-    return (
-      <div>hej</div>
-    )
   }
 
   handleSearch(newFilter) {     
@@ -99,11 +82,9 @@ class TableContainer extends React.Component {
     event.preventDefault();
     const column = event.target.getAttribute('value');
     let sort = 'asc';
-    //jeżeli po raz kolejny sortujemy tą samą kolumną to posortuj w drugą stronę
     if(this.state.order.column == event.target.getAttribute('value')) {
       sort = this.state.order.sort == 'asc' ? 'desc' : 'asc';
     }
-    console.log(event.target.getAttribute('value'));
     this.setState({order: {
       column: column,
       sort: sort
@@ -113,14 +94,21 @@ class TableContainer extends React.Component {
   }
 
   render() {
+    const { filter, limit, page, isLoading, all_records, headers, data } = this.state 
     return (
-      <div>
-        {
-          this.displayView()
-        }
-      </div>
-    );
+      <Table  data={data}
+              headers={headers}
+              all_records={all_records}
+              isLoading={isLoading}
+              page={page}
+              limit={limit}
+              filter={filter} />
+    )
   }
+}
+
+TableContainer.propTypes = {
+  url: React.PropTypes.string.isRequired
 }
 
 export default TableContainer
