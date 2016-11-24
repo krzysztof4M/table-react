@@ -15,21 +15,21 @@ class TablePagination extends React.Component {
   }
 
   renderPreviousButtons(start, pageNumber) {
-    const liClassName = pageNumber == 1 ? 'paginate_button previous disabled' : 'paginate_button previous';
-    const faClassName = start ? 'fa fa-angle-double-left' : 'fa fa-angle-left';
+    const liClassName = pageNumber == 1 && 'disabled';
+    const icon = start ? 'fa fa-angle-double-left' : 'fa fa-angle-left';
     return (
-        <li className='paginate-button'>
-          <a href='#' onClick={this.onClick} value={(start || pageNumber == 1) ? 1 : pageNumber - 1}><i className={faClassName}></i></a>
+        <li className={`paginate-button ${liClassName}`}>
+          <a href='#' onClick={this.onClick} value={(start || pageNumber == 1) ? 1 : pageNumber - 1}><i className={icon}></i></a>
         </li>   
       );
   }
 
   renderNextButtons(end, pageNumber, pagesCount) {
-    const liClassName = pageNumber == pagesCount ? 'paginate_button next disabled' : 'paginate_button next';
-    const faClassName = end ? 'fa fa-angle-double-right' : 'fa fa-angle-right';
+    const liClassName = pageNumber == pagesCount && 'disabled';
+    const icon = end ? 'fa fa-angle-double-right' : 'fa fa-angle-right';
     return (
-        <li className='paginate-button'>
-          <a href='#' onClick={this.onClick} value={end || pagesCount == pageNumber ? pagesCount : pageNumber + 1}><i className={faClassName}></i></a>
+        <li className={`paginate-button ${liClassName}`}>
+          <a href='#' onClick={this.onClick} value={end || pagesCount == pageNumber ? pagesCount : pageNumber + 1}><i className={icon}></i></a>
         </li>   
       );
   }

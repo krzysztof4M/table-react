@@ -109,13 +109,17 @@ body {
 		@include flex-box (center, center);
 		height: $pagination-button-height;
 		width: $pagination-button-width;
-		border: 1px solid $pagination-buttob-border-color;
+		border: 1px solid $pagination-button-border-color;
 		border-right: 0;
 		a {
 			color: $pagination-button-font-color;
 		}
 	 	&:nth-last-child(1){
-			border-right: 1px solid $pagination-buttob-border-color;
+			border-right: 1px solid $pagination-button-border-color;
 		}
-	}
+  }
+
+  li.disabled:hover a{
+    cursor: not-allowed;
+  }
 }
