@@ -56,13 +56,9 @@
 	
 	var _TableContainer2 = _interopRequireDefault(_TableContainer);
 	
-	var _main = __webpack_require__(219);
-	
-	var _main2 = _interopRequireDefault(_main);
+	__webpack_require__(219);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	// eslint-disable-line no-unused-vars
 	
 	(0, _reactDom.render)(_react2.default.createElement(_TableContainer2.default, { url: 'api/data', title: 'Items list' }), document.getElementById('app'));
 
@@ -23814,7 +23810,7 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'wrapper' },
+	        { className: 'table-wrapper' },
 	        _react2.default.createElement(
 	          'header',
 	          null,
@@ -23826,59 +23822,35 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          null,
+	          { className: 'table-container' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: '' },
+	            { className: 'toolbar' },
+	            _react2.default.createElement(_TableFilter2.default, { filter: filter,
+	              handleSearch: handleSearch }),
+	            _react2.default.createElement(_TableLength2.default, { handleChangeLimit: handleChangeLimit })
+	          ),
+	          _react2.default.createElement(
+	            'table',
+	            { className: 'table' },
 	            _react2.default.createElement(
-	              'div',
-	              { className: '' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'toolbar' },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: '' },
-	                  _react2.default.createElement(_TableFilter2.default, { filter: filter,
-	                    handleSearch: handleSearch })
-	                ),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: '' },
-	                  _react2.default.createElement(_TableLength2.default, { handleChangeLimit: handleChangeLimit })
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'table',
-	                { className: 'table' },
-	                _react2.default.createElement(
-	                  'thead',
-	                  null,
-	                  _react2.default.createElement(_TableHeader2.default, { headers: headers,
-	                    handleSort: handleSort
-	                  })
-	                ),
-	                _react2.default.createElement(
-	                  'tbody',
-	                  null,
-	                  this.displayBody()
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'footer' },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: '' },
-	                  _react2.default.createElement(_TableCounter2.default, { all_records: all_records, page: page, limit: limit })
-	                ),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: '' },
-	                  _react2.default.createElement(_TablePagination2.default, { handlePagination: handlePagination, limit: limit, all_records: all_records, page: this.props.page })
-	                )
-	              )
+	              'thead',
+	              null,
+	              _react2.default.createElement(_TableHeader2.default, { headers: headers,
+	                handleSort: handleSort
+	              })
+	            ),
+	            _react2.default.createElement(
+	              'tbody',
+	              null,
+	              this.displayBody()
 	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'footer' },
+	            _react2.default.createElement(_TableCounter2.default, { all_records: all_records, page: page, limit: limit }),
+	            _react2.default.createElement(_TablePagination2.default, { handlePagination: handlePagination, limit: limit, all_records: all_records, page: this.props.page })
 	          )
 	        )
 	      );
@@ -24076,7 +24048,8 @@
 	        'div',
 	        { className: 'filter-box' },
 	        _react2.default.createElement('input', { type: 'search', className: '', placeholder: 'Search...', value: this.state.filter,
-	          onChange: this.handleChange, onKeyPress: this.handleKeyPress })
+	          onChange: this.handleChange, onKeyPress: this.handleKeyPress }),
+	        _react2.default.createElement('span', null)
 	      );
 	    }
 	  }]);
@@ -24378,7 +24351,7 @@
 	        _react2.default.createElement(
 	          'a',
 	          { href: '#', onClick: this.onClick, value: end || pagesCount == pageNumber ? pagesCount : pageNumber + 1 },
-	          _react2.default.createElement('i', { className: 'fa fa-angle-left' })
+	          _react2.default.createElement('i', { className: faClassName })
 	        )
 	      );
 	    }
@@ -24388,7 +24361,7 @@
 	      var _this2 = this;
 	
 	      var pagesCount = Math.ceil(this.props.all_records / this.props.limit);
-	      var page = parseInt(this.props.page);
+	      var page = parseInt(this.props.page, 0);
 	      var pagesList = [page - 2, page - 1, page, page + 1, page + 2].filter(function (value) {
 	        return value > pagesCount || value < 1 ? false : true;
 	      });
@@ -24402,7 +24375,7 @@
 	          this.renderPreviousButtons(true, page),
 	          this.renderPreviousButtons(false, page),
 	          pagesList.map(function (pageNumber) {
-	            return _react2.default.createElement(_PaginationLink2.default, { onClick: _this2.onClick, pageNumber: pageNumber, isActive: page == pageNumber ? true : false, key: pageNumber });
+	            return _react2.default.createElement(_PaginationLink2.default, { onClick: _this2.onClick, pageNumber: pageNumber, isActive: page == pageNumber, key: pageNumber });
 	          }),
 	          this.renderNextButtons(false, page, pagesCount),
 	          this.renderNextButtons(true, page, pagesCount)
@@ -24413,6 +24386,10 @@
 	
 	  return TablePagination;
 	}(_react2.default.Component);
+	
+	TablePagination.propTypes = {
+	  handlePagination: _react2.default.PropTypes.func.isRequired
+	};
 	
 	exports.default = TablePagination;
 
@@ -24541,7 +24518,7 @@
 	var content = __webpack_require__(220);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(221)(content, {});
+	var update = __webpack_require__(222)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -24561,19 +24538,75 @@
 /* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(222)();
+	exports = module.exports = __webpack_require__(221)();
 	// imports
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Roboto);", ""]);
 	exports.push([module.id, "@import url(https://use.fontawesome.com/d2b6c53020.js);", ""]);
 	
 	// module
-	exports.push([module.id, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\nbody {\n  font-family: 'Roboto', sans-serif; }\n\n.wrapper {\n  margin: 0 0 30px;\n  position: relative;\n  border-radius: 0;\n  padding: 0; }\n\n.wrapper > header {\n  border-color: red;\n  background-color: red;\n  display: flex;\n  align-items: center;\n  color: #fff;\n  height: 40px; }\n\nheader > h2 {\n  padding: 0 10px; }\n\n.toolbar {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  height: 40px;\n  padding: 0 10px; }\n\n.table {\n  width: 100%; }\n\n.table > thead a {\n  text-decoration: none; }\n\n.table tr {\n  height: 30px; }\n  .table tr td, .table tr th {\n    line-height: 30px;\n    text-align: left;\n    padding-left: 10px; }\n  .table tr th {\n    text-transform: uppercase; }\n\ntr:nth-child(2n) {\n  background-color: blue; }\n\n.filter-box > input {\n  height: 26px;\n  padding: 0 10px; }\n\n.length-box > select {\n  height: 26px; }\n\n.footer {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 10px;\n  height: 40px; }\n\n.pagination-list {\n  display: flex;\n  justify-content: flex-end; }\n\n.paginate-button {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  margin-right: -1px;\n  height: 26px;\n  width: 26px;\n  border: 1px solid black; }\n\n.paginate-button > a {\n  text-decoration: none; }\n", "", {"version":3,"sources":["/./src/client/styles/src/client/styles/reset.scss","/./src/client/styles/src/client/styles/main.scss"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;EAaC,UAAU;EACV,WAAW;EACX,UAAU;EACV,gBAAgB;EAChB,cAAc;EACd,yBAAyB,EACzB;;AACD,iDAAiD;AACjD;;EAEC,eAAe,EACf;;AACD;EACC,eAAe,EACf;;AACD;EACC,iBAAiB,EACjB;;AACD;EACC,aAAa,EACb;;AACD;;EAEC,YAAY;EACZ,cAAc,EACd;;AACD;EACC,0BAA0B;EAC1B,kBAAkB,EAClB;;ACtCD;EACC,kCAAkC,EAClC;;AAED;EACC,iBAAiB;EAChB,mBAAmB;EACnB,iBAAiB;EACjB,WAAW,EACZ;;AAED;EACE,kBAAkB;EAClB,sBAAsB;EACtB,cAAc;EACd,oBAAoB;EACpB,YAAY;EACZ,aAAa,EACd;;AAED;EACC,gBAAgB,EAChB;;AAED;EACC,cAAc;EACd,+BAA+B;EAC/B,oBAAoB;EACpB,aAAa;EACb,gBAAgB,EAChB;;AAED;EACC,YAAY,EACZ;;AAED;EACC,sBAAsB,EACtB;;AAED;EACC,aAAa,EASb;EAVD;IAGE,kBAAkB;IAClB,iBAAiB;IACjB,mBAAmB,EACnB;EANF;IAQE,0BAA0B,EAC1B;;AAGF;EACC,uBAAuB,EACvB;;AAED;EACC,aAAa;EACb,gBAAgB,EAChB;;AAED;EACC,aAAa,EACb;;AAED;EACC,cAAc;EACd,+BAA+B;EAC/B,oBAAoB;EACpB,gBAAgB;EAChB,aAAa,EACb;;AAED;EACC,cAAc;EACd,0BAA0B,EAC1B;;AAED;EACC,cAAc;EACd,oBAAoB;EACpB,wBAAwB;EACxB,mBAAmB;EACnB,aAAa;EACb,YAAY;EACZ,wBAAwB,EACxB;;AAED;EACC,sBAAsB,EACtB","file":"main.scss","sourcesContent":["html, body, div, span, applet, object, iframe,\r\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\r\na, abbr, acronym, address, big, cite, code,\r\ndel, dfn, em, img, ins, kbd, q, s, samp,\r\nsmall, strike, strong, sub, sup, tt, var,\r\nb, u, i, center,\r\ndl, dt, dd, ol, ul, li,\r\nfieldset, form, label, legend,\r\ntable, caption, tbody, tfoot, thead, tr, th, td,\r\narticle, aside, canvas, details, embed, \r\nfigure, figcaption, footer, header, hgroup, \r\nmenu, nav, output, ruby, section, summary,\r\ntime, mark, audio, video {\r\n\tmargin: 0;\r\n\tpadding: 0;\r\n\tborder: 0;\r\n\tfont-size: 100%;\r\n\tfont: inherit;\r\n\tvertical-align: baseline;\r\n}\r\n/* HTML5 display-role reset for older browsers */\r\narticle, aside, details, figcaption, figure, \r\nfooter, header, hgroup, menu, nav, section {\r\n\tdisplay: block;\r\n}\r\nbody {\r\n\tline-height: 1;\r\n}\r\nol, ul {\r\n\tlist-style: none;\r\n}\r\nblockquote, q {\r\n\tquotes: none;\r\n}\r\nblockquote:before, blockquote:after,\r\nq:before, q:after {\r\n\tcontent: '';\r\n\tcontent: none;\r\n}\r\ntable {\r\n\tborder-collapse: collapse;\r\n\tborder-spacing: 0;\r\n}","@import 'reset';\r\n@import url('https://fonts.googleapis.com/css?family=Roboto');\r\n@import url('https://use.fontawesome.com/d2b6c53020.js');\r\n\r\nbody {\r\n\tfont-family: 'Roboto', sans-serif;\r\n}\r\n\r\n.wrapper {\r\n\tmargin: 0 0 30px;\r\n  position: relative;\r\n  border-radius: 0;\r\n  padding: 0;\r\n}\r\n\r\n.wrapper > header {\r\n  border-color: red;\r\n  background-color: red;\r\n  display: flex;\r\n  align-items: center;\r\n  color: #fff;\r\n  height: 40px;\r\n}\r\n\r\nheader > h2 {\r\n\tpadding: 0 10px;\r\n}\r\n\r\n.toolbar {\r\n\tdisplay: flex;\r\n\tjustify-content: space-between;\r\n\talign-items: center;\r\n\theight: 40px;\r\n\tpadding: 0 10px;\r\n}\r\n\r\n.table {\r\n\twidth: 100%;\r\n}\r\n\r\n.table > thead a {\r\n\ttext-decoration: none;\r\n}\r\n\r\n.table tr {\r\n\theight: 30px;\r\n\t& td, th {\r\n\t\tline-height: 30px;\r\n\t\ttext-align: left;\r\n\t\tpadding-left: 10px;\r\n\t}\r\n\t& th {\r\n\t\ttext-transform: uppercase;\r\n\t}\r\n}\r\n\r\ntr:nth-child(2n) {\r\n\tbackground-color: blue;\r\n}\r\n\r\n.filter-box > input {\r\n\theight: 26px;\r\n\tpadding: 0 10px;\r\n}\r\n\r\n.length-box > select {\r\n\theight: 26px;\r\n}\r\n\r\n.footer {\r\n\tdisplay: flex;\r\n\tjustify-content: space-between;\r\n\talign-items: center;\r\n\tpadding: 0 10px;\r\n\theight: 40px;\r\n}\r\n\r\n.pagination-list {\r\n\tdisplay: flex;\r\n\tjustify-content: flex-end;\r\n}\r\n\r\n.paginate-button {\r\n\tdisplay: flex;\r\n\talign-items: center;\r\n\tjustify-content: center;\r\n\tmargin-right: -1px;\r\n\theight: 26px;\r\n\twidth: 26px;\r\n\tborder: 1px solid black;\r\n}\r\n\r\n.paginate-button > a {\r\n\ttext-decoration: none;\r\n}"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\nbody {\n  font-family: 'Roboto', sans-serif; }\n\n.table-wrapper a {\n  text-decoration: none; }\n\n.table-wrapper header {\n  display: flex;\n  align-items: center;\n  background-color: #eee;\n  color: #898c92;\n  height: 40px; }\n  .table-wrapper header h2 {\n    padding: 0 10px; }\n\n.table-wrapper .toolbar-footer, .table-wrapper .toolbar, .table-wrapper .footer {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 10px; }\n\n.table-wrapper .toolbar {\n  height: 40px; }\n\n.table-wrapper .footer {\n  height: 40px; }\n\n.table-wrapper .table {\n  width: 100%; }\n  .table-wrapper .table thead a {\n    color: #fff; }\n  .table-wrapper .table tbody tr:nth-child(2n) {\n    background-color: #eee; }\n  .table-wrapper .table tbody tr:hover {\n    background-color: #8f8f8f; }\n    .table-wrapper .table tbody tr:hover td {\n      color: #fff; }\n  .table-wrapper .table tr {\n    height: 30px; }\n    .table-wrapper .table tr td, .table-wrapper .table tr th {\n      line-height: 30px;\n      text-align: left;\n      padding: 0 10px; }\n    .table-wrapper .table tr th {\n      text-transform: uppercase;\n      background-color: #5f5f5f; }\n    .table-wrapper .table tr td {\n      color: #898c92; }\n\n.table-wrapper .filter-box input, .table-wrapper .filter-box select, .table-wrapper .length-box input, .table-wrapper .length-box select {\n  height: 26px; }\n\n.table-wrapper .filter-box input, .table-wrapper .length-box input {\n  padding: 0 10px; }\n\n.table-wrapper .pagination-list {\n  display: flex;\n  justify-content: flex-end; }\n\n.table-wrapper .dataTables_info {\n  color: #5f5f5f; }\n\n.table-wrapper .paginate-button {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 26px;\n  width: 26px;\n  border: 1px solid #5f5f5f;\n  border-right: 0; }\n  .table-wrapper .paginate-button a {\n    color: #5f5f5f; }\n  .table-wrapper .paginate-button:nth-last-child(1) {\n    border-right: 1px solid #5f5f5f; }\n", "", {"version":3,"sources":["/./src/client/styles/src/client/styles/reset.scss","/./src/client/styles/src/client/styles/main.scss","/./src/client/styles/src/client/styles/variables.scss"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;EAaC,UAAU;EACV,WAAW;EACX,UAAU;EACV,gBAAgB;EAChB,cAAc;EACd,yBAAyB,EACzB;;AACD,iDAAiD;AACjD;;EAEC,eAAe,EACf;;AACD;EACC,eAAe,EACf;;AACD;EACC,iBAAiB,EACjB;;AACD;EACC,aAAa,EACb;;AACD;;EAEC,YAAY;EACZ,cAAc,EACd;;AACD;EACC,0BAA0B;EAC1B,kBAAkB,EAClB;;ACrCD;EACC,kCAAkC,EAClC;;AAaD;EAEE,sBAAsB,EACtB;;AAHF;EAVC,cAAc;EAMb,oBAU+B;EAC/B,uBCzBe;ED0Bf,eC3BY;ED4BZ,aCpBkB,EDwBlB;EAbF;IAWG,gBCLwB,EDMxB;;AAZH;EAVC,cAAc;EAEb,+BAwBgC;EApBhC,oBAoBwC;EACxC,gBCXyB,EDYzB;;AAlBF;EAsBE,aC9BmB,ED+BnB;;AAvBF;EA2BE,aCnCmB,EDqCnB;;AA7BF;EAgCE,YAAY,EAmCZ;EAnEF;IAkCG,YCpB8B,EDqB9B;EAnCH;IAuCI,uBCzDa,ED0Db;EAxCJ;IA2CI,0BC3DgB,ED+DhB;IA/CJ;MA6CK,YAAY,EACZ;EA9CL;IAmDG,aC1CmB,EDyDnB;IAlEH;MAqDI,kBC5CkB;MD6ClB,iBAAiB;MACjB,gBCjDuB,EDkDvB;IAxDJ;MA2DI,0BAA0B;MAC1B,0BC7Ee,ED8Ef;IA7DJ;MAgEI,eCnFU,EDoFV;;AAjEJ;EAuEG,aCzEuB,ED0EvB;;AAxEH;EA2EG,gBCrEwB,EDsExB;;AA5EH;EAVC,cAAc;EAEb,0BAwF2B,EAC3B;;AAjFF;EAoFE,eCrGiB,EDsGjB;;AArFF;EAVC,cAAc;EAEb,wBAgGyB;EA5FzB,oBA4FiC;EACjC,aC1F6B;ED2F7B,YC3F6B;ED4F7B,0BC5GiB;ED6GjB,gBAAgB,EAOhB;EAnGF;IA8FG,eC/GgB,EDgHhB;EA/FH;IAiGG,gCClHgB,EDmHhB","file":"main.scss","sourcesContent":["html, body, div, span, applet, object, iframe,\r\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\r\na, abbr, acronym, address, big, cite, code,\r\ndel, dfn, em, img, ins, kbd, q, s, samp,\r\nsmall, strike, strong, sub, sup, tt, var,\r\nb, u, i, center,\r\ndl, dt, dd, ol, ul, li,\r\nfieldset, form, label, legend,\r\ntable, caption, tbody, tfoot, thead, tr, th, td,\r\narticle, aside, canvas, details, embed, \r\nfigure, figcaption, footer, header, hgroup, \r\nmenu, nav, output, ruby, section, summary,\r\ntime, mark, audio, video {\r\n\tmargin: 0;\r\n\tpadding: 0;\r\n\tborder: 0;\r\n\tfont-size: 100%;\r\n\tfont: inherit;\r\n\tvertical-align: baseline;\r\n}\r\n/* HTML5 display-role reset for older browsers */\r\narticle, aside, details, figcaption, figure, \r\nfooter, header, hgroup, menu, nav, section {\r\n\tdisplay: block;\r\n}\r\nbody {\r\n\tline-height: 1;\r\n}\r\nol, ul {\r\n\tlist-style: none;\r\n}\r\nblockquote, q {\r\n\tquotes: none;\r\n}\r\nblockquote:before, blockquote:after,\r\nq:before, q:after {\r\n\tcontent: '';\r\n\tcontent: none;\r\n}\r\ntable {\r\n\tborder-collapse: collapse;\r\n\tborder-spacing: 0;\r\n}","@import 'reset';\r\n@import 'variables';\r\n@import url('https://fonts.googleapis.com/css?family=Roboto');\r\n@import url('https://use.fontawesome.com/d2b6c53020.js');\r\n\r\nbody {\r\n\tfont-family: 'Roboto', sans-serif;\r\n}\r\n\r\n@mixin flex-box ($justify-content, $align-items) {\r\n\tdisplay: flex;\r\n\t@if $justify-content {\r\n\t\tjustify-content: $justify-content;\r\n\t}\r\n\r\n\t@if $align-items {\r\n\t\talign-items: $align-items;\r\n\t}\r\n}\r\n\r\n.table-wrapper {\r\n\ta {\r\n\t\ttext-decoration: none;\r\n\t}\r\n\r\n\theader {\r\n\t\t@include flex-box (null, center);\r\n\t\tbackground-color: $header-bg-color;\r\n\t\tcolor: $header-font-color;\r\n\t\theight: $header-height;\r\n\t\th2 {\r\n\t\t\tpadding: $padding-left-right;\r\n\t\t}\r\n\t}\r\n\r\n\t.toolbar-footer {\r\n\t\t@include flex-box (space-between, center);\r\n\t\tpadding: $padding-left-right;\r\n\t}\r\n\r\n\t.toolbar{\r\n\t\t@extend .toolbar-footer;\r\n\t\theight: $toolbar-height;\r\n\t}\r\n\r\n\t.footer {\r\n\t\t@extend .toolbar-footer;\r\n\t\theight: $footer-height;\r\n\t\t\r\n\t}\r\n\r\n\t.table {\r\n\t\twidth: 100%;\r\n\t\tthead a {\r\n\t\t\tcolor: $table-tr-font-color-header;\r\n\t\t}\r\n\r\n\t\ttbody tr{\r\n\t\t\t&:nth-child(2n) {\r\n\t\t\t\tbackground-color: $table-tr-bg-2n-color;\r\n\t\t\t}\r\n\r\n\t\t\t&:hover {\r\n\t\t\t\tbackground-color: $table-tr-bg-hover;\r\n\t\t\t\ttd {\r\n\t\t\t\t\tcolor: #fff;\r\n\t\t\t\t} \r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\ttr {\r\n\t\t\theight: $table-tr-height;\r\n\t\t\ttd, th {\r\n\t\t\t\tline-height: $table-tr-height;\r\n\t\t\t\ttext-align: left;\r\n\t\t\t\tpadding: $padding-left-right;\r\n\t\t\t}\r\n\r\n\t\t\tth {\r\n\t\t\t\ttext-transform: uppercase;\r\n\t\t\t\tbackground-color: $table-tr-bg-header-color;\r\n\t\t\t}\r\n\r\n\t\t\ttd {\r\n\t\t\t\tcolor: $table-tr-font-color-tbody;\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\r\n\t.filter-box, .length-box {\r\n\t\tinput, select {\r\n\t\t\theight: $input-select-height;\r\n\t\t}\r\n\r\n\t\tinput {\r\n\t\t\tpadding: $padding-left-right;\r\n\t\t}\r\n\t}\r\n\r\n\t.pagination-list {\r\n\t\t@include flex-box (flex-end, null);\r\n\t}\r\n\r\n\t.dataTables_info {\r\n\t\tcolor: $pagination-info-font-color;\r\n\t}\r\n\r\n\t.paginate-button {\r\n\t\t@include flex-box (center, center);\r\n\t\theight: $pagination-button-height;\r\n\t\twidth: $pagination-button-width;\r\n\t\tborder: 1px solid $pagination-buttob-border-color;\r\n\t\tborder-right: 0;\r\n\t\ta {\r\n\t\t\tcolor: $pagination-button-font-color;\r\n\t\t}\r\n\t \t&:nth-last-child(1){\r\n\t\t\tborder-right: 1px solid $pagination-buttob-border-color;\r\n\t\t}\r\n\t}\r\n}","//COLORS:\r\n$gray: #898c92;\r\n$light-gray: #eee;\r\n$dark-gray: #5f5f5f;\r\n$dark-gray2: #8f8f8f;\r\n\r\n//HEADER\r\n$header-font-color: $gray;\r\n$header-bg-color: $light-gray;\r\n$header-height: 40px;\r\n\r\n//TOOLBAR\r\n$toolbar-height: 40px;\r\n\r\n//FOOTER\r\n$footer-height: $toolbar-height;\r\n\r\n//SEARCH, SELECT & PAGINATION\r\n$input-select-height: 26px;\r\n$pagination-button-height: 26px;\r\n$pagination-button-width: $pagination-button-height;\r\n$pagination-button-font-color: $dark-gray;\r\n$pagination-buttob-border-color: $pagination-button-font-color;\r\n$pagination-info-font-color: $pagination-button-font-color;\r\n\r\n//PADDING\r\n$padding-left-right: 0 10px;\r\n\r\n//TABLE\r\n$table-tr-height: 30px;\r\n$table-tr-bg-header-color: $dark-gray;\r\n$table-tr-bg-hover: $dark-gray2;\r\n$table-tr-bg-1n-color: #fff;\r\n$table-tr-bg-2n-color: $light-gray;\r\n$table-tr-font-color-header: #fff;\r\n$table-tr-font-color-tbody: $gray;"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
 
 /***/ },
 /* 221 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+	
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+	
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -24822,62 +24855,6 @@
 		if(oldSrc)
 			URL.revokeObjectURL(oldSrc);
 	}
-
-
-/***/ },
-/* 222 */
-/***/ function(module, exports) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function() {
-		var list = [];
-	
-		// return the list of modules as css string
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-	
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
 
 
 /***/ }

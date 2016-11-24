@@ -22,43 +22,31 @@ class Table extends React.Component {
   render() {
     const { title, filter, headers, handleSearch, all_records, page, limit, handlePagination, handleChangeLimit, handleSort } = this.props       
     return (
-      <div className='wrapper'>
+      <div className='table-wrapper'>
         <header>
           <h2>{title}</h2>
         </header>
-        <div>
-          <div className=''>
-            <div className=''>
-              <div className='toolbar'>
-                <div className=''>
-                  <TableFilter  filter={filter} 
-                                handleSearch={handleSearch} />
-                </div>
-                <div className=''>
-                  <TableLength handleChangeLimit={handleChangeLimit} />
-                </div>
-              </div>
-              <table className='table'>
-                <thead>
-                  <TableHeader  headers={headers}
-                                handleSort={handleSort}
-                  />
-                </thead>
-                <tbody>
-                  {
-                    this.displayBody()
-                  }
-                </tbody>
-              </table>
-              <div className='footer'>
-                <div className=''>
-                  <TableCounter all_records={all_records} page={page} limit={limit} />
-                </div>
-                <div className=''>
-                  <TablePagination handlePagination={handlePagination} limit={limit} all_records={all_records} page={this.props.page} />
-                </div>
-              </div>
-            </div>
+        <div className='table-container'>
+          <div className='toolbar'>
+            <TableFilter  filter={filter} 
+                            handleSearch={handleSearch} />
+            <TableLength handleChangeLimit={handleChangeLimit} />
+          </div>
+          <table className='table'>
+            <thead>
+              <TableHeader  headers={headers}
+                            handleSort={handleSort}
+              />
+            </thead>
+            <tbody>
+              {
+                this.displayBody()
+              }
+            </tbody>
+          </table>
+          <div className='footer'>
+            <TableCounter all_records={all_records} page={page} limit={limit} />
+            <TablePagination handlePagination={handlePagination} limit={limit} all_records={all_records} page={this.props.page} />
           </div>
         </div>
       </div>

@@ -29,14 +29,14 @@ class TablePagination extends React.Component {
     const faClassName = end ? 'fa fa-angle-double-right' : 'fa fa-angle-right';
     return (
         <li className='paginate-button'>
-          <a href='#' onClick={this.onClick} value={end || pagesCount == pageNumber ? pagesCount : pageNumber + 1}><i className='fa fa-angle-left'></i></a>
+          <a href='#' onClick={this.onClick} value={end || pagesCount == pageNumber ? pagesCount : pageNumber + 1}><i className={faClassName}></i></a>
         </li>   
       );
   }
 
   render() {
     const pagesCount = Math.ceil(this.props.all_records/this.props.limit); 
-    const page = parseInt(this.props.page);  
+    const page = parseInt(this.props.page,0);  
     const pagesList = [
         page-2,
         page-1,
@@ -50,13 +50,17 @@ class TablePagination extends React.Component {
         <ul className='pagination-list'>
           { this.renderPreviousButtons(true, page) }
           { this.renderPreviousButtons(false, page) }
-          { pagesList.map(pageNumber => <PaginationLink onClick={this.onClick} pageNumber={pageNumber} isActive={page == pageNumber ? true : false} key={pageNumber}/>) }
+          { pagesList.map(pageNumber => <PaginationLink onClick={this.onClick} pageNumber={pageNumber} isActive={page == pageNumber} key={pageNumber}/>) }
           { this.renderNextButtons(false, page, pagesCount) }
           { this.renderNextButtons(true, page, pagesCount) }
         </ul>
       </div>
     )
   }
+}
+
+TablePagination.propTypes = {
+  handlePagination: React.PropTypes.func.isRequired
 }
 
 export default TablePagination

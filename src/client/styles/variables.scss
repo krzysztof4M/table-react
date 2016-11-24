@@ -1,0 +1,36 @@
+//COLORS:
+$gray: #898c92;
+$light-gray: #eee;
+$dark-gray: #5f5f5f;
+$dark-gray2: #8f8f8f;
+
+//HEADER
+$header-font-color: $gray;
+$header-bg-color: $light-gray;
+$header-height: 40px;
+
+//TOOLBAR
+$toolbar-height: 40px;
+
+//FOOTER
+$footer-height: $toolbar-height;
+
+//SEARCH, SELECT & PAGINATION
+$input-select-height: 26px;
+$pagination-button-height: 26px;
+$pagination-button-width: $pagination-button-height;
+$pagination-button-font-color: $dark-gray;
+$pagination-buttob-border-color: $pagination-button-font-color;
+$pagination-info-font-color: $pagination-button-font-color;
+
+//PADDING
+$padding-left-right: 0 10px;
+
+//TABLE
+$table-tr-height: 30px;
+$table-tr-bg-header-color: $dark-gray;
+$table-tr-bg-hover: $dark-gray2;
+$table-tr-bg-1n-color: #fff;
+$table-tr-bg-2n-color: $light-gray;
+$table-tr-font-color-header: #fff;
+$table-tr-font-color-tbody: $gray;

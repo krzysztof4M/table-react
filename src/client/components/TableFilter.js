@@ -25,6 +25,7 @@ class TableFilter extends React.Component {
       <div className='filter-box'>
           <input type='search' className='' placeholder='Search...' value={this.state.filter}
             onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
+            <span></span>
       </div>
     )
   }

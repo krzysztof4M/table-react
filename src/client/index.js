@@ -3,6 +3,6 @@ import { render } from 'react-dom'
 
 import TableContainer from './components/TableContainer'
 
-import style from './styles/main.scss' // eslint-disable-line no-unused-vars
+import './styles/main.scss' 
 
 render(<TableContainer url='api/data' title='Items list' />, document.getElementById('app'));
