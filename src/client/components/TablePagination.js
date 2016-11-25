@@ -5,13 +5,11 @@ import PaginationLink from './PaginationLink'
 class TablePagination extends React.Component {
   constructor(props) {
     super(props); 
-    this.onClick = this.onClick.bind(this);
+    this.handlePagination = this.handlePagination.bind(this);
   }
 
-  onClick(event) {
-    event.preventDefault();
-    const newPage = parseInt(event.target.getAttribute('value'),0);
-    this.props.handlePagination(newPage);    
+  handlePagination(page) {
+    this.props.handlePagination(page);    
   }
 
   renderPreviousButtons(start, pageNumber) {
@@ -27,6 +25,7 @@ class TablePagination extends React.Component {
   renderNextButtons(end, pageNumber, pagesCount) {
     const liClassName = pageNumber == pagesCount && 'disabled';
     const icon = end ? 'fa fa-angle-double-right' : 'fa fa-angle-right';
+    const value = end || pagesCount == pageNumber ? pagesCount : pageNumber + 1
     return (
         <li className={`paginate-button ${liClassName}`}>
           <a href='#' onClick={this.onClick} value={end || pagesCount == pageNumber ? pagesCount : pageNumber + 1}><i className={icon}></i></a>
@@ -36,7 +35,7 @@ class TablePagination extends React.Component {
 
   render() {
     const pagesCount = Math.ceil(this.props.all_records/this.props.limit); 
-    const page = parseInt(this.props.page,0);  
+    const page = this.props.page;  
     const pagesList = [
         page-2,
         page-1,
@@ -48,11 +47,45 @@ class TablePagination extends React.Component {
     return (
       <div className=''>
         <ul className='pagination-list'>
-          { this.renderPreviousButtons(true, page) }
-          { this.renderPreviousButtons(false, page) }
-          { pagesList.map(pageNumber => <PaginationLink onClick={this.onClick} pageNumber={pageNumber} isActive={page == pageNumber} key={pageNumber}/>) }
-          { this.renderNextButtons(false, page, pagesCount) }
-          { this.renderNextButtons(true, page, pagesCount) }
+          <PaginationLink 
+            handlePagination={this.handlePagination} 
+            pageNumber={1} 
+            isDisabled={page == 1}
+            isActive={false}
+            icon={'fa fa-angle-double-left'}
+          />
+          <PaginationLink 
+            handlePagination={this.handlePagination} 
+            pageNumber={Math.max(1, page - 1)} 
+            isDisabled={page == 1}
+            isActive={false}
+            icon={'fa fa-angle-left'}
+          />
+          { 
+            pagesList.map(pageNumber => 
+              <PaginationLink 
+                handlePagination={this.handlePagination} 
+                pageNumber={pageNumber} 
+                key={pageNumber}
+                isDisabled={false}
+                isActive={pageNumber == page}
+              />
+              )
+          }
+          <PaginationLink 
+            handlePagination={this.handlePagination} 
+            pageNumber={Math.min(pagesCount, page + 1)} 
+            isDisabled={pagesCount == 1}
+            isActive={false}
+            icon={'fa fa-angle-right'}
+          />
+          <PaginationLink 
+            handlePagination={this.handlePagination} 
+            pageNumber={pagesCount} 
+            isDisabled={pagesCount == 1}
+            isActive={false}
+            icon={'fa fa-angle-double-right'}
+          />
         </ul>
       </div>
     )
