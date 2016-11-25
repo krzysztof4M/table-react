@@ -19,6 +19,7 @@ body {
 }
 
 .table-wrapper {
+  border-bottom: 2px solid $light-gray;
 	a {
 		text-decoration: none;
 	}
@@ -113,6 +114,15 @@ body {
 		border-right: 0;
 		a {
 			color: $pagination-button-font-color;
+      width: 100%;
+      height: 100%;
+      @include flex-box (center, center);
+      &:hover, 
+      &.active {
+        color: #fff;
+        font-weight: 500;
+        background-color: $dark-gray;
+      }
 		}
 	 	&:nth-last-child(1){
 			border-right: 1px solid $pagination-button-border-color;
@@ -121,5 +131,6 @@ body {
 
   li.disabled:hover a{
     cursor: not-allowed;
+
   }
 }

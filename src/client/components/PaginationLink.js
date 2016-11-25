@@ -24,8 +24,8 @@ class PaginationLink extends React.Component {
     const disabledClass = isDisabled ? 'disabled' : ''
 
     return (     
-        <li className={`paginate-button ${activeClass} ${disabledClass}`}>
-          <a href='#' onClick={!isDisabled ? this.onClick : null}>
+        <li className={`paginate-button ${disabledClass}`}>
+          <a href='#' className={activeClass} onClick={!isDisabled ? this.onClick : null}>
             { this.displayContent() }
           </a>
         </li>
