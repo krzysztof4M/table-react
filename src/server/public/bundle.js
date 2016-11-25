@@ -24371,8 +24371,20 @@
 	        _react2.default.createElement(
 	          'ul',
 	          { className: 'pagination-list' },
-	          this.renderPreviousButtons(true, page),
-	          this.renderPreviousButtons(false, page),
+	          _react2.default.createElement(_PaginationLink2.default, {
+	            handlePagination: this.handlePagination,
+	            pageNumber: 1,
+	            isDisabled: page == 1,
+	            isActive: false,
+	            icon: 'fa fa-angle-double-left'
+	          }),
+	          _react2.default.createElement(_PaginationLink2.default, {
+	            handlePagination: this.handlePagination,
+	            pageNumber: Math.max(1, page - 1),
+	            isDisabled: page == 1,
+	            isActive: false,
+	            icon: 'fa fa-angle-left'
+	          }),
 	          pagesList.map(function (pageNumber) {
 	            return _react2.default.createElement(_PaginationLink2.default, {
 	              handlePagination: _this2.handlePagination,
@@ -24382,8 +24394,20 @@
 	              isActive: pageNumber == page
 	            });
 	          }),
-	          this.renderNextButtons(false, page, pagesCount),
-	          this.renderNextButtons(true, page, pagesCount)
+	          _react2.default.createElement(_PaginationLink2.default, {
+	            handlePagination: this.handlePagination,
+	            pageNumber: Math.min(pagesCount, page + 1),
+	            isDisabled: pagesCount == 1,
+	            isActive: false,
+	            icon: 'fa fa-angle-right'
+	          }),
+	          _react2.default.createElement(_PaginationLink2.default, {
+	            handlePagination: this.handlePagination,
+	            pageNumber: pagesCount,
+	            isDisabled: pagesCount == 1,
+	            isActive: false,
+	            icon: 'fa fa-angle-double-right'
+	          })
 	        )
 	      );
 	    }
@@ -24876,7 +24900,7 @@
 	        { className: 'paginate-button ' + activeClass + ' ' + disabledClass },
 	        _react2.default.createElement(
 	          'a',
-	          { href: '#', onClick: this.onClick },
+	          { href: '#', onClick: !isDisabled ? this.onClick : null },
 	          this.displayContent()
 	        )
 	      );

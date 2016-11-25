@@ -47,8 +47,20 @@ class TablePagination extends React.Component {
     return (
       <div className=''>
         <ul className='pagination-list'>
-          { this.renderPreviousButtons(true, page) }
-          { this.renderPreviousButtons(false, page) }
+          <PaginationLink 
+            handlePagination={this.handlePagination} 
+            pageNumber={1} 
+            isDisabled={page == 1}
+            isActive={false}
+            icon={'fa fa-angle-double-left'}
+          />
+          <PaginationLink 
+            handlePagination={this.handlePagination} 
+            pageNumber={Math.max(1, page - 1)} 
+            isDisabled={page == 1}
+            isActive={false}
+            icon={'fa fa-angle-left'}
+          />
           { 
             pagesList.map(pageNumber => 
               <PaginationLink 
@@ -60,8 +72,20 @@ class TablePagination extends React.Component {
               />
               )
           }
-          { this.renderNextButtons(false, page, pagesCount) }
-          { this.renderNextButtons(true, page, pagesCount) }
+          <PaginationLink 
+            handlePagination={this.handlePagination} 
+            pageNumber={Math.min(pagesCount, page + 1)} 
+            isDisabled={pagesCount == 1}
+            isActive={false}
+            icon={'fa fa-angle-right'}
+          />
+          <PaginationLink 
+            handlePagination={this.handlePagination} 
+            pageNumber={pagesCount} 
+            isDisabled={pagesCount == 1}
+            isActive={false}
+            icon={'fa fa-angle-double-right'}
+          />
         </ul>
       </div>
     )
