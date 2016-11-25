@@ -24062,7 +24062,7 @@
 	}(_react2.default.Component);
 	
 	TableFilter.propTypes = {
-	  filter: _react2.default.PropTypes.number.isRequired,
+	  filter: _react2.default.PropTypes.string.isRequired,
 	  handleSearch: _react2.default.PropTypes.func.isRequired
 	};
 	

@@ -32,7 +32,7 @@ class TableFilter extends React.Component {
 }
 
 TableFilter.propTypes = {
-  filter: React.PropTypes.number.isRequired,
+  filter: React.PropTypes.string.isRequired,
   handleSearch: React.PropTypes.func.isRequired
 }
 
