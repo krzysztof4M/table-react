@@ -11,4 +11,10 @@ class TableCounter extends React.Component {
   }
 }
 
+TableCounter.propTypes = {
+	page: React.PropTypes.number.isRequired,
+	limit: React.PropTypes.number.isRequired,
+	all_records:React.PropTypes.number.isRequired
+}
+
 export default TableCounter

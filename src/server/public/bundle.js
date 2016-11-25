@@ -24276,6 +24276,12 @@
 	  return TableCounter;
 	}(_react2.default.Component);
 	
+	TableCounter.propTypes = {
+	  page: _react2.default.PropTypes.number.isRequired,
+	  limit: _react2.default.PropTypes.number.isRequired,
+	  all_records: _react2.default.PropTypes.number.isRequired
+	};
+	
 	exports.default = TableCounter;
 
 /***/ },
