@@ -24397,14 +24397,14 @@
 	          _react2.default.createElement(_PaginationLink2.default, {
 	            handlePagination: this.handlePagination,
 	            pageNumber: Math.min(pagesCount, page + 1),
-	            isDisabled: pagesCount == 1,
+	            isDisabled: pagesCount == page,
 	            isActive: false,
 	            icon: 'fa fa-angle-right'
 	          }),
 	          _react2.default.createElement(_PaginationLink2.default, {
 	            handlePagination: this.handlePagination,
 	            pageNumber: pagesCount,
-	            isDisabled: pagesCount == 1,
+	            isDisabled: pagesCount == page,
 	            isActive: false,
 	            icon: 'fa fa-angle-double-right'
 	          })
