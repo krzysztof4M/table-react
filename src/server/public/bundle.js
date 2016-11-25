@@ -56,7 +56,7 @@
 	
 	var _TableContainer2 = _interopRequireDefault(_TableContainer);
 	
-	__webpack_require__(219);
+	__webpack_require__(218);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -23761,7 +23761,7 @@
 	
 	var _TablePagination2 = _interopRequireDefault(_TablePagination);
 	
-	var _TableRow = __webpack_require__(218);
+	var _TableRow = __webpack_require__(217);
 	
 	var _TableRow2 = _interopRequireDefault(_TableRow);
 	
@@ -24294,7 +24294,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _PaginationLink = __webpack_require__(217);
+	var _PaginationLink = __webpack_require__(222);
 	
 	var _PaginationLink2 = _interopRequireDefault(_PaginationLink);
 	
@@ -24314,16 +24314,14 @@
 	
 	    var _this = _possibleConstructorReturn(this, (TablePagination.__proto__ || Object.getPrototypeOf(TablePagination)).call(this, props));
 	
-	    _this.onClick = _this.onClick.bind(_this);
+	    _this.handlePagination = _this.handlePagination.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(TablePagination, [{
-	    key: 'onClick',
-	    value: function onClick(event) {
-	      event.preventDefault();
-	      var newPage = parseInt(event.target.getAttribute('value'), 0);
-	      this.props.handlePagination(newPage);
+	    key: 'handlePagination',
+	    value: function handlePagination(page) {
+	      this.props.handlePagination(page);
 	    }
 	  }, {
 	    key: 'renderPreviousButtons',
@@ -24345,6 +24343,7 @@
 	    value: function renderNextButtons(end, pageNumber, pagesCount) {
 	      var liClassName = pageNumber == pagesCount && 'disabled';
 	      var icon = end ? 'fa fa-angle-double-right' : 'fa fa-angle-right';
+	      var value = end || pagesCount == pageNumber ? pagesCount : pageNumber + 1;
 	      return _react2.default.createElement(
 	        'li',
 	        { className: 'paginate-button ' + liClassName },
@@ -24361,7 +24360,7 @@
 	      var _this2 = this;
 	
 	      var pagesCount = Math.ceil(this.props.all_records / this.props.limit);
-	      var page = parseInt(this.props.page, 0);
+	      var page = this.props.page;
 	      var pagesList = [page - 2, page - 1, page, page + 1, page + 2].filter(function (value) {
 	        return value > pagesCount || value < 1 ? false : true;
 	      });
@@ -24375,7 +24374,13 @@
 	          this.renderPreviousButtons(true, page),
 	          this.renderPreviousButtons(false, page),
 	          pagesList.map(function (pageNumber) {
-	            return _react2.default.createElement(_PaginationLink2.default, { onClick: _this2.onClick, pageNumber: pageNumber, isActive: page == pageNumber, key: pageNumber });
+	            return _react2.default.createElement(_PaginationLink2.default, {
+	              handlePagination: _this2.handlePagination,
+	              pageNumber: pageNumber,
+	              key: pageNumber,
+	              isDisabled: false,
+	              isActive: pageNumber == page
+	            });
 	          }),
 	          this.renderNextButtons(false, page, pagesCount),
 	          this.renderNextButtons(true, page, pagesCount)
@@ -24395,60 +24400,6 @@
 
 /***/ },
 /* 217 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PaginationLink = function (_React$Component) {
-	  _inherits(PaginationLink, _React$Component);
-	
-	  function PaginationLink() {
-	    _classCallCheck(this, PaginationLink);
-	
-	    return _possibleConstructorReturn(this, (PaginationLink.__proto__ || Object.getPrototypeOf(PaginationLink)).apply(this, arguments));
-	  }
-	
-	  _createClass(PaginationLink, [{
-	    key: 'render',
-	    value: function render() {
-	      var className = this.props.isActive ? 'paginate_button active' : 'paginate_button';
-	      return _react2.default.createElement(
-	        'li',
-	        { className: 'paginate-button' },
-	        _react2.default.createElement(
-	          'a',
-	          { onClick: this.props.onClick, href: '#', value: this.props.pageNumber },
-	          this.props.pageNumber
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return PaginationLink;
-	}(_react2.default.Component);
-	
-	exports.default = PaginationLink;
-
-/***/ },
-/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24509,16 +24460,16 @@
 	exports.default = TableRow;
 
 /***/ },
-/* 219 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(220);
+	var content = __webpack_require__(219);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(222)(content, {});
+	var update = __webpack_require__(221)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -24535,10 +24486,10 @@
 	}
 
 /***/ },
-/* 220 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(221)();
+	exports = module.exports = __webpack_require__(220)();
 	// imports
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Roboto);", ""]);
 	exports.push([module.id, "@import url(https://use.fontawesome.com/d2b6c53020.js);", ""]);
@@ -24550,7 +24501,7 @@
 
 
 /***/ },
-/* 221 */
+/* 220 */
 /***/ function(module, exports) {
 
 	/*
@@ -24606,7 +24557,7 @@
 
 
 /***/ },
-/* 222 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -24856,6 +24807,94 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 222 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PaginationLink = function (_React$Component) {
+	  _inherits(PaginationLink, _React$Component);
+	
+	  function PaginationLink(props) {
+	    _classCallCheck(this, PaginationLink);
+	
+	    var _this = _possibleConstructorReturn(this, (PaginationLink.__proto__ || Object.getPrototypeOf(PaginationLink)).call(this, props));
+	
+	    _this.onClick = _this.onClick.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(PaginationLink, [{
+	    key: 'onClick',
+	    value: function onClick(e) {
+	      e.preventDefault();
+	      this.props.handlePagination(this.props.pageNumber);
+	    }
+	  }, {
+	    key: 'displayContent',
+	    value: function displayContent() {
+	      var _props = this.props,
+	          icon = _props.icon,
+	          pageNumber = _props.pageNumber;
+	
+	      var content = icon ? _react2.default.createElement('i', { className: icon }) : pageNumber;
+	      return content;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props2 = this.props,
+	          isActive = _props2.isActive,
+	          isDisabled = _props2.isDisabled;
+	
+	
+	      var activeClass = isActive ? 'active' : '';
+	      var disabledClass = isDisabled ? 'disabled' : '';
+	
+	      return _react2.default.createElement(
+	        'li',
+	        { className: 'paginate-button ' + activeClass + ' ' + disabledClass },
+	        _react2.default.createElement(
+	          'a',
+	          { href: '#', onClick: this.onClick },
+	          this.displayContent()
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return PaginationLink;
+	}(_react2.default.Component);
+	
+	PaginationLink.propTypes = {
+	  isActive: _react2.default.PropTypes.bool.isRequired,
+	  isDisabled: _react2.default.PropTypes.bool.isRequired,
+	  pageNumber: _react2.default.PropTypes.number.isRequired,
+	  handlePagination: _react2.default.PropTypes.func,
+	  icon: _react2.default.PropTypes.string
+	};
+	
+	exports.default = PaginationLink;
 
 /***/ }
 /******/ ]);
