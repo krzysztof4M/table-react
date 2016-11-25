@@ -15,4 +15,9 @@ class TableHeader extends React.Component {
   }
 }
 
+TableHeader.propTypes = {
+  headers: React.PropTypes.array.isRequired,
+  handleSort: React.PropTypes.func.isRequired
+}
+
 export default TableHeader

@@ -23,12 +23,17 @@ class TableFilter extends React.Component {
 
     return (
       <div className='filter-box'>
-          <input type='search' className='' placeholder='Search...' value={this.state.filter}
+          <input type='search' placeholder='Search...' value={this.state.filter}
             onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
             <span></span>
       </div>
     )
   }
+}
+
+TableFilter.propTypes = {
+  filter: React.PropTypes.number.isRequired,
+  handleSearch: React.PropTypes.func.isRequired
 }
 
 export default TableFilter

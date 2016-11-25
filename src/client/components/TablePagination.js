@@ -21,7 +21,7 @@ class TablePagination extends React.Component {
         page,
         page+1,
         page+2
-        ].filter(value => (value > pagesCount || value < 1) ? false : true );
+        ].filter(value => !(value > pagesCount || value < 1));
 
     return (
       <div className=''>

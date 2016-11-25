@@ -10,4 +10,8 @@ class TablePlaceholder extends React.Component {
   }
 }
 
+TablePlaceholder.propTypes = {
+  length: React.PropTypes.number.isRequired
+}
+
 export default TablePlaceholder
