@@ -12,30 +12,9 @@ class TablePagination extends React.Component {
     this.props.handlePagination(page);    
   }
 
-  renderPreviousButtons(start, pageNumber) {
-    const liClassName = pageNumber == 1 && 'disabled';
-    const icon = start ? 'fa fa-angle-double-left' : 'fa fa-angle-left';
-    return (
-        <li className={`paginate-button ${liClassName}`}>
-          <a href='#' onClick={this.onClick} value={(start || pageNumber == 1) ? 1 : pageNumber - 1}><i className={icon}></i></a>
-        </li>   
-      );
-  }
-
-  renderNextButtons(end, pageNumber, pagesCount) {
-    const liClassName = pageNumber == pagesCount && 'disabled';
-    const icon = end ? 'fa fa-angle-double-right' : 'fa fa-angle-right';
-    const value = end || pagesCount == pageNumber ? pagesCount : pageNumber + 1
-    return (
-        <li className={`paginate-button ${liClassName}`}>
-          <a href='#' onClick={this.onClick} value={end || pagesCount == pageNumber ? pagesCount : pageNumber + 1}><i className={icon}></i></a>
-        </li>   
-      );
-  }
-
   render() {
-    const pagesCount = Math.ceil(this.props.all_records/this.props.limit); 
-    const page = this.props.page;  
+    const { all_records, limit, page } = this.props
+    const pagesCount = Math.ceil(all_records / limit);   
     const pagesList = [
         page-2,
         page-1,
@@ -93,6 +72,9 @@ class TablePagination extends React.Component {
 }
 
 TablePagination.propTypes = {
+  all_records: React.PropTypes.number.isRequired,
+  limit: React.PropTypes.number.isRequired,
+  page:React.PropTypes.number.isRequired,
   handlePagination: React.PropTypes.func.isRequired
 }
 

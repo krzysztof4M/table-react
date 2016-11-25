@@ -1,3 +1,4 @@
 node_modules
-src/server/public/bundle
-src/server/public/bundle.map
+src/server/public/bundle.js
+src/server/public/bundle.js.map
+npm-debug.log

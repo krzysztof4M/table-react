@@ -24330,43 +24330,16 @@
 	      this.props.handlePagination(page);
 	    }
 	  }, {
-	    key: 'renderPreviousButtons',
-	    value: function renderPreviousButtons(start, pageNumber) {
-	      var liClassName = pageNumber == 1 && 'disabled';
-	      var icon = start ? 'fa fa-angle-double-left' : 'fa fa-angle-left';
-	      return _react2.default.createElement(
-	        'li',
-	        { className: 'paginate-button ' + liClassName },
-	        _react2.default.createElement(
-	          'a',
-	          { href: '#', onClick: this.onClick, value: start || pageNumber == 1 ? 1 : pageNumber - 1 },
-	          _react2.default.createElement('i', { className: icon })
-	        )
-	      );
-	    }
-	  }, {
-	    key: 'renderNextButtons',
-	    value: function renderNextButtons(end, pageNumber, pagesCount) {
-	      var liClassName = pageNumber == pagesCount && 'disabled';
-	      var icon = end ? 'fa fa-angle-double-right' : 'fa fa-angle-right';
-	      var value = end || pagesCount == pageNumber ? pagesCount : pageNumber + 1;
-	      return _react2.default.createElement(
-	        'li',
-	        { className: 'paginate-button ' + liClassName },
-	        _react2.default.createElement(
-	          'a',
-	          { href: '#', onClick: this.onClick, value: end || pagesCount == pageNumber ? pagesCount : pageNumber + 1 },
-	          _react2.default.createElement('i', { className: icon })
-	        )
-	      );
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
 	
-	      var pagesCount = Math.ceil(this.props.all_records / this.props.limit);
-	      var page = this.props.page;
+	      var _props = this.props,
+	          all_records = _props.all_records,
+	          limit = _props.limit,
+	          page = _props.page;
+	
+	      var pagesCount = Math.ceil(all_records / limit);
 	      var pagesList = [page - 2, page - 1, page, page + 1, page + 2].filter(function (value) {
 	        return value > pagesCount || value < 1 ? false : true;
 	      });
@@ -24423,6 +24396,9 @@
 	}(_react2.default.Component);
 	
 	TablePagination.propTypes = {
+	  all_records: _react2.default.PropTypes.number.isRequired,
+	  limit: _react2.default.PropTypes.number.isRequired,
+	  page: _react2.default.PropTypes.number.isRequired,
 	  handlePagination: _react2.default.PropTypes.func.isRequired
 	};
 	
