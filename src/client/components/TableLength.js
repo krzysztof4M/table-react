@@ -14,7 +14,7 @@ class TableLength extends React.Component {
   render() {
     return (
       <div className='length-box'>
-          <select className='' onChange={this.handleChange}>
+          <select onChange={this.handleChange}>
             <option value='3'>3</option>
             <option value='5'>5</option>
             <option value='10'>10</option>

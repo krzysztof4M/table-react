@@ -24117,7 +24117,7 @@
 	        { className: 'length-box' },
 	        _react2.default.createElement(
 	          'select',
-	          { className: '', onChange: this.handleChange },
+	          { onChange: this.handleChange },
 	          _react2.default.createElement(
 	            'option',
 	            { value: '3' },
@@ -24263,23 +24263,23 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'dataTables_info' },
+	        null,
 	        'Showing ',
 	        _react2.default.createElement(
 	          'span',
-	          { className: 'txt-color-darken' },
+	          null,
 	          (page - 1) * limit + 1
 	        ),
 	        ' to ',
 	        _react2.default.createElement(
 	          'span',
-	          { className: 'txt-color-darken' },
+	          null,
 	          Math.min(page * limit, all_records)
 	        ),
 	        ' of ',
 	        _react2.default.createElement(
 	          'span',
-	          { className: 'text-primary' },
+	          null,
 	          all_records
 	        ),
 	        ' entries'
