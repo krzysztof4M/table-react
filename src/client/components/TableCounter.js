@@ -5,7 +5,7 @@ class TableCounter extends React.Component {
     const {page, limit, all_records} = this.props
     return (
       <div>
-        Showing <span>{(page - 1) * limit + 1}</span> to <span>{Math.min(page * limit, all_records)}</span> of <span>{all_records}</span> entries
+        Showing <span>{(page - 1) * limit + 1}</span> to <span>{Math.min(page * limit, all_records)}</span> of <span>{all_records}</span> rows
       </div>
     )
   }

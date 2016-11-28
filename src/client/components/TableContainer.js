@@ -10,7 +10,6 @@ class TableContainer extends React.Component {
     this.state = {
       isLoading: true,
       data: [],
-      headers: [],
       all_records: 0,
       filter: '',
       limit: 3,
@@ -48,7 +47,6 @@ class TableContainer extends React.Component {
     .then((response) => {
       that.setState({
         data: response.data.data,
-        headers: response.data.headers,
         all_records: response.data.all_records,
         isLoading: false
       })
@@ -92,12 +90,10 @@ class TableContainer extends React.Component {
     );
   }
 
-  handleSort(event) {
-    event.preventDefault();
-    const column = event.target.getAttribute('value')
-    let sort = this.state.order.sort
-    if(this.state.order.column === column) {
-      sort = this.state.order.sort === 'asc' ? 'desc' : 'asc'
+  handleSort(column) {
+    let sort = 'asc';
+    if(this.state.order.column == column) {
+      sort = this.state.order.sort == 'asc' ? 'desc' : 'asc';
     }
     this.setState({order: {
       column: column,
@@ -108,8 +104,8 @@ class TableContainer extends React.Component {
   }
 
   render() {
-    const { filter, limit, page, isLoading, all_records, headers, data } = this.state 
-    const { title } = this.props
+    const { filter, limit, page, isLoading, all_records, data } = this.state 
+    const { title, headers } = this.props
     return (
       <Table  title={title}
               data={data}
@@ -129,7 +125,8 @@ class TableContainer extends React.Component {
 
 TableContainer.propTypes = {
   url: React.PropTypes.string.isRequired,
-  title: React.PropTypes.string.isRequired
+  title: React.PropTypes.string.isRequired,
+  headers: React.PropTypes.array.isRequired
 }
 
 export default TableContainer

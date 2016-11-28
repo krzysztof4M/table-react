@@ -9,7 +9,7 @@ class TableHeader extends React.Component {
       <tr>
         {
           Object.keys(headers).map((el,i) => 
-            <TableHeaderRow key={i} handleSort={handleSort} value={el} title={headers[el]} />
+            <TableHeaderCell key={i} handleSort={handleSort} value={el} title={headers[el]} />
           )
         }
       </tr>

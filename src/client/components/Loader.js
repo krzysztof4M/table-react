@@ -4,7 +4,7 @@ class Loader extends React.Component {
   render() {
     return (
       <tr>
-        <td className='table-loader' colSpan='9'>
+        <td className='table-loader' colSpan={this.props.length} >
           <div className='spinner'>
             <div className='bounce1'></div>
             <div className='bounce2'></div>

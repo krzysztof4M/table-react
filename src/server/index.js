@@ -3,7 +3,6 @@ var path = require('path')
 var app = express()
 
 var data = {
-  headers : ['id', 'name', 'year', 'added_time', 'editor'],
   data : [
     { id: 1, name: 'Mononucleose', year: 2010, added_time: 1479896444, editor: 'John Doe' },
     { id: 2, name: 'Lorem iopsum', year: 2009, added_time: 1479896144, editor: 'Marry Blake' },

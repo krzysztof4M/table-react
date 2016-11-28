@@ -56,11 +56,11 @@
 	
 	var _TableContainer2 = _interopRequireDefault(_TableContainer);
 	
-	__webpack_require__(219);
+	__webpack_require__(220);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	(0, _reactDom.render)(_react2.default.createElement(_TableContainer2.default, { url: 'api/data', title: 'Items list' }), document.getElementById('app'));
+	(0, _reactDom.render)(_react2.default.createElement(_TableContainer2.default, { url: 'api/data', title: 'Items list', headers: ['id', 'name', 'year', 'added_time', 'editor'] }), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -21496,7 +21496,6 @@
 	    _this.state = {
 	      isLoading: true,
 	      data: [],
-	      headers: [],
 	      all_records: 0,
 	      filter: '',
 	      limit: 3,
@@ -21543,7 +21542,6 @@
 	      }).then(function (response) {
 	        that.setState({
 	          data: response.data.data,
-	          headers: response.data.headers,
 	          all_records: response.data.all_records,
 	          isLoading: false
 	        });
@@ -21590,14 +21588,12 @@
 	    }
 	  }, {
 	    key: 'handleSort',
-	    value: function handleSort(event) {
+	    value: function handleSort(column) {
 	      var _this5 = this;
 	
-	      event.preventDefault();
-	      var column = event.target.getAttribute('value');
-	      var sort = this.state.order.sort;
-	      if (this.state.order.column === column) {
-	        sort = this.state.order.sort === 'asc' ? 'desc' : 'asc';
+	      var sort = 'asc';
+	      if (this.state.order.column == column) {
+	        sort = this.state.order.sort == 'asc' ? 'desc' : 'asc';
 	      }
 	      this.setState({ order: {
 	          column: column,
@@ -21615,9 +21611,10 @@
 	          page = _state2.page,
 	          isLoading = _state2.isLoading,
 	          all_records = _state2.all_records,
-	          headers = _state2.headers,
 	          data = _state2.data;
-	      var title = this.props.title;
+	      var _props = this.props,
+	          title = _props.title,
+	          headers = _props.headers;
 	
 	      return _react2.default.createElement(_Table2.default, { title: title,
 	        data: data,
@@ -21639,7 +21636,8 @@
 	
 	TableContainer.propTypes = {
 	  url: _react2.default.PropTypes.string.isRequired,
-	  title: _react2.default.PropTypes.string.isRequired
+	  title: _react2.default.PropTypes.string.isRequired,
+	  headers: _react2.default.PropTypes.array.isRequired
 	};
 	
 	exports.default = TableContainer;
@@ -23753,15 +23751,15 @@
 	
 	var _TableHeader2 = _interopRequireDefault(_TableHeader);
 	
-	var _TableCounter = __webpack_require__(215);
+	var _TableCounter = __webpack_require__(216);
 	
 	var _TableCounter2 = _interopRequireDefault(_TableCounter);
 	
-	var _TablePagination = __webpack_require__(216);
+	var _TablePagination = __webpack_require__(217);
 	
 	var _TablePagination2 = _interopRequireDefault(_TablePagination);
 	
-	var _TableRow = __webpack_require__(218);
+	var _TableRow = __webpack_require__(219);
 	
 	var _TableRow2 = _interopRequireDefault(_TableRow);
 	
@@ -23918,7 +23916,7 @@
 	        null,
 	        _react2.default.createElement(
 	          'td',
-	          { className: 'table-loader', colSpan: '9' },
+	          { className: 'table-loader', colSpan: this.props.length },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'spinner' },
@@ -24168,6 +24166,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _TableHeaderCell = __webpack_require__(215);
+	
+	var _TableHeaderCell2 = _interopRequireDefault(_TableHeaderCell);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24196,15 +24198,7 @@
 	        'tr',
 	        null,
 	        Object.keys(headers).map(function (el, i) {
-	          return _react2.default.createElement(
-	            'th',
-	            { key: i },
-	            _react2.default.createElement(
-	              'a',
-	              { href: '#', value: el, onClick: handleSort },
-	              headers[el]
-	            )
-	          );
+	          return _react2.default.createElement(_TableHeaderCell2.default, { key: i, handleSort: handleSort, value: el, title: headers[el] });
 	        })
 	      );
 	    }
@@ -24222,6 +24216,68 @@
 
 /***/ },
 /* 215 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var TableHeaderCell = function (_React$Component) {
+	  _inherits(TableHeaderCell, _React$Component);
+	
+	  function TableHeaderCell(props) {
+	    _classCallCheck(this, TableHeaderCell);
+	
+	    var _this = _possibleConstructorReturn(this, (TableHeaderCell.__proto__ || Object.getPrototypeOf(TableHeaderCell)).call(this, props));
+	
+	    _this.onClick = _this.onClick.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(TableHeaderCell, [{
+	    key: "onClick",
+	    value: function onClick(e) {
+	      e.preventDefault();
+	      this.props.handleSort(this.props.value);
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "th",
+	        null,
+	        _react2.default.createElement(
+	          "a",
+	          { href: "#", onClick: this.onClick },
+	          this.props.title
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return TableHeaderCell;
+	}(_react2.default.Component);
+	
+	exports.default = TableHeaderCell;
+
+/***/ },
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24282,7 +24338,7 @@
 	          null,
 	          all_records
 	        ),
-	        ' entries'
+	        ' rows'
 	      );
 	    }
 	  }]);
@@ -24299,7 +24355,7 @@
 	exports.default = TableCounter;
 
 /***/ },
-/* 216 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24314,7 +24370,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _PaginationLink = __webpack_require__(217);
+	var _PaginationLink = __webpack_require__(218);
 	
 	var _PaginationLink2 = _interopRequireDefault(_PaginationLink);
 	
@@ -24419,7 +24475,7 @@
 	exports.default = TablePagination;
 
 /***/ },
-/* 217 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24507,7 +24563,7 @@
 	exports.default = PaginationLink;
 
 /***/ },
-/* 218 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24568,16 +24624,16 @@
 	exports.default = TableRow;
 
 /***/ },
-/* 219 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(220);
+	var content = __webpack_require__(221);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(222)(content, {});
+	var update = __webpack_require__(223)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -24594,10 +24650,10 @@
 	}
 
 /***/ },
-/* 220 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(221)();
+	exports = module.exports = __webpack_require__(222)();
 	// imports
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Roboto);", ""]);
 	exports.push([module.id, "@import url(https://use.fontawesome.com/d2b6c53020.js);", ""]);
@@ -24609,7 +24665,7 @@
 
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports) {
 
 	/*
@@ -24665,7 +24721,7 @@
 
 
 /***/ },
-/* 222 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
