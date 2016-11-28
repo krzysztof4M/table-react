@@ -1,5 +1,7 @@
 import React from 'react'
 
+import TableHeaderCell from './TableHeaderCell'
+
 class TableHeader extends React.Component {
   render() {
     const { headers, handleSort } = this.props
@@ -7,7 +9,7 @@ class TableHeader extends React.Component {
       <tr>
         {
           Object.keys(headers).map((el,i) => 
-            <th key={i}><a href='#' value={el} onClick={handleSort}>{headers[el]}</a></th>
+            <TableHeaderRow key={i} handleSort={handleSort} value={el} title={headers[el]} />
           )
         }
       </tr>
